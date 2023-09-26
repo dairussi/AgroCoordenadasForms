@@ -4,6 +4,8 @@ using System.Text;
 using Tesseract;
 using PdfiumViewer;
 using System.Drawing;
+using AgroCoordenadas.Interface;
+using AgroCoordenadas.Service;
 
 namespace AgroCoordenadas
 {
@@ -11,11 +13,165 @@ namespace AgroCoordenadas
     {
         private string tempFilePath = "";
         private static List<string> texts = new List<string>();
+        private readonly IFilter _filter;
+
         public Form1()
         {
             InitializeComponent();
+            _filter = new FilterService();
         }
 
+        private string FormatNFilterResult(Dictionary<string, List<string>> results)
+        {
+            List<string> nArray = results.ContainsKey("N") ? results["N"] : new List<string>();
+            int maxItems = nArray.Count;
+            StringBuilder resultString = new StringBuilder();
+
+            if (maxItems > 0)
+            {
+                resultString.AppendLine("N");
+                for (int i = 0; i < maxItems; i++)
+                {
+                    string n = nArray[i];
+                    string formattedN = FormatValueUtm(n); // Create a FormatValueUtm method if needed
+                    resultString.AppendLine(formattedN);
+                }
+            }
+
+            return resultString.ToString();
+        }
+
+        private string FormatEFilterResult(Dictionary<string, List<string>> results)
+        {
+            List<string> eArray = results.ContainsKey("E") ? results["E"] : new List<string>();
+            int maxItems = eArray.Count;
+            StringBuilder resultString = new StringBuilder();
+
+            if (maxItems > 0)
+            {
+                resultString.AppendLine("E;");
+                for (int i = 0; i < maxItems; i++)
+                {
+                    string e = eArray[i];
+                    string formattedE = FormatValueUtm(e); // Create a FormatValueUtm method if needed
+                    resultString.AppendLine(formattedE);
+                }
+            }
+
+            return resultString.ToString();
+        }
+
+        private string FormatLatFilterResult(Dictionary<string, List<string>> results)
+        {
+            List<string> latitudeArray = results.ContainsKey("Latitude") ? results["Latitude"] : new List<string>();
+            int maxItems = latitudeArray.Count;
+            StringBuilder resultString = new StringBuilder();
+
+            if (maxItems > 0)
+            {
+                resultString.AppendLine("Latitude");
+                for (int i = 0; i < maxItems; i++)
+                {
+                    string latitude = latitudeArray[i];
+                    string formattedLatitude = FormatValueLatLong(latitude);
+                    resultString.AppendLine(formattedLatitude);
+                }
+            }
+
+            return resultString.ToString();
+        }
+
+        private string FormatLongFilterResult(Dictionary<string, List<string>> results)
+        {
+            List<string> longitudeArray = results.ContainsKey("Longitude") ? results["Longitude"] : new List<string>();
+            int maxItems = longitudeArray.Count;
+            StringBuilder resultString = new StringBuilder();
+
+            if (maxItems > 0)
+            {
+                resultString.AppendLine("Longitude;");
+                for (int i = 0; i < maxItems; i++)
+                {
+                    string longitude = longitudeArray[i];
+                    string formattedLongitude = FormatValueLatLong(longitude);
+                    resultString.AppendLine(formattedLongitude);
+                }
+            }
+
+            return resultString.ToString();
+        }
+
+        private string CombineContent(Dictionary<string, List<string>> results)
+        {
+            string eResultString = FormatEFilterResult(results);
+            string nResultString = FormatNFilterResult(results);
+            string longResultString = FormatLongFilterResult(results);
+            string latResultString = FormatLatFilterResult(results);
+
+            string[] eLines = eResultString.Split('\n');
+            string[] nLines = nResultString.Split('\n');
+            string[] longLines = longResultString.Split('\n');
+            string[] latLines = latResultString.Split('\n');
+
+            List<string> combinedLines = new List<string>();
+            int maxLines = Math.Max(Math.Max(eLines.Length, nLines.Length), Math.Max(longLines.Length, latLines.Length));
+
+            for (int i = 0; i < maxLines; i++)
+            {
+                string eLine = i < eLines.Length ? eLines[i] : "";
+                string nLine = i < nLines.Length ? nLines[i] : "";
+                string longLine = i < longLines.Length ? longLines[i] : "";
+                string latLine = i < latLines.Length ? latLines[i] : "";
+
+                if (!string.IsNullOrWhiteSpace(nLine) || !string.IsNullOrWhiteSpace(eLine) || !string.IsNullOrWhiteSpace(latLine) || !string.IsNullOrWhiteSpace(longLine))
+                {
+                    combinedLines.Add($"{eLine}{nLine}{longLine}{latLine}");
+                }
+            }
+
+            return string.Join("\n", combinedLines);
+        }
+
+        private string FormatValueUtm(string value)
+        {
+            string formattedValue = value;
+            if (formattedValue.Length > 4)
+            {
+                string lastFour = formattedValue.Substring(formattedValue.Length - 4);
+                string everythingElse = formattedValue.Substring(0, formattedValue.Length - 4);
+                string lastFourFormatted = lastFour.Replace(",", ".");
+                string everythingElseFormatted = new string(everythingElse.Where(char.IsDigit).ToArray());
+                formattedValue = everythingElseFormatted + lastFourFormatted;
+            }
+            else
+            {
+                formattedValue = formattedValue.Replace(",", "").TrimEnd();
+            }
+            return formattedValue;
+        }
+
+        private string FormatValueLatLong(string value)
+        {
+            string formattedValue = value.Replace(".", ",");
+            string finalFormattedValue = formattedValue.Replace("º", "°");
+            return finalFormattedValue;
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            texts.Clear();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog1.FileName;
+                string fileName = System.IO.Path.GetFileName(filePath);
+                string nomeDoArquivoNormalizado = fileName.Normalize(NormalizationForm.FormD);
+                tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), nomeDoArquivoNormalizado);
+                File.Copy(filePath, tempFilePath, true);
+                richTextBox1.Text = fileName;
+            }
+
+        }
         private bool IsSelectablePdf(string tempFilePath)
         {
             bool isSelectablePdf = false;
@@ -56,7 +212,7 @@ namespace AgroCoordenadas
 
         private List<string> PdfImg(string tempFilePath)
         {
-            string outputFolder = @"Tempory/";
+            string outputFolder = "Tempory/";
             if (Directory.Exists(outputFolder))
             {
                 Directory.Delete(outputFolder, true);
@@ -106,10 +262,8 @@ namespace AgroCoordenadas
 
             File.Delete(tempFilePath);
 
-
-            //lê as imagens com tecnologia OCR usando o tesseract
-            Environment.SetEnvironmentVariable("TESSDATA_PREFIX", @"./tessdata/");
-            using (var engine = new TesseractEngine(@"./tessdata/", "eng", EngineMode.Default))
+            Environment.SetEnvironmentVariable("TESSDATA_PREFIX", "./tessdata");
+            using (TesseractEngine engine = new TesseractEngine("./tessdata", "eng", EngineMode.Default))
             {
                 string[] imageFiles = Directory.GetFiles(outputFolder, "*.png");
                 foreach (var imageFile in imageFiles)
@@ -138,54 +292,79 @@ namespace AgroCoordenadas
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private Dictionary<string, List<string>> ApplyFilter(List<string> texts)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            Dictionary<string, List<string>> results = new Dictionary<string, List<string>>();
+
+            foreach (var text in texts)
             {
-                string filePath = openFileDialog1.FileName;
-                string fileName = System.IO.Path.GetFileName(filePath);
-                string nomeDoArquivoNormalizado = fileName.Normalize(NormalizationForm.FormD);
-                string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), nomeDoArquivoNormalizado);
-                File.Copy(filePath, tempFilePath, true);
-                richTextBox1.Text = fileName;
+                var coordinates = _filter.Filter(text);
+                foreach (var kvp in coordinates)
+                {
+                    if (!results.ContainsKey(kvp.Key))
+                    {
+                        results[kvp.Key] = new List<string>();
+                    }
+                    results[kvp.Key].AddRange(kvp.Value);
+                }
             }
 
+            return results;
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_MouseDown(object sender, EventArgs e)
         {
+            button6.MouseDown -= button6_MouseDown;
+
+
             if (string.IsNullOrEmpty(tempFilePath))
             {
                 MessageBox.Show("Selecione um arquivo PDF antes de continuar.");
             }
             else
             {
-                bool isSelectablePdf = IsSelectablePdf(tempFilePath);
-
-                if (isSelectablePdf)
+                try
                 {
-                    List<string> textFromPdfText = PdfText(tempFilePath);
-                    List<string> textFromPdfImg = PdfImg(tempFilePath);
+                    bool isSelectablePdf = IsSelectablePdf(tempFilePath);
 
-                    if (textFromPdfText.Count > textFromPdfImg.Count)
+                    if (isSelectablePdf)
                     {
-                        texts = textFromPdfText;
+                        List<string> textFromPdfText = PdfText(tempFilePath);
+                        List<string> textFromPdfImg = PdfImg(tempFilePath);
+
+                        if (textFromPdfText.Count > textFromPdfImg.Count)
+                        {
+                            texts = textFromPdfText;
+                        }
+                        else
+                        {
+                            texts = textFromPdfImg;
+                        }
                     }
                     else
                     {
+                        List<string> textFromPdfImg = PdfImg(tempFilePath);
                         texts = textFromPdfImg;
                     }
+                    richTextBox2.Text = string.Join(Environment.NewLine, texts);
+
+                    Dictionary<string, List<string>> filteredResults = ApplyFilter(texts);
+                    richTextBox3.Text = CombineContent(filteredResults);
                 }
-                else
+                finally
                 {
-                    List<string> textFromPdfImg = PdfImg(tempFilePath);
-                    texts = textFromPdfImg;
+                    button6.Enabled = true;
+                    texts.Clear();
                 }
-                richTextBox1.Text = string.Join(Environment.NewLine, texts);
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
         {
 
         }

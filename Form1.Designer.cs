@@ -38,6 +38,8 @@
             button4 = new Button();
             button5 = new Button();
             button6 = new Button();
+            richTextBox2 = new RichTextBox();
+            richTextBox3 = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -142,14 +144,33 @@
             button6.TabIndex = 7;
             button6.Text = "Filtrar";
             button6.UseVisualStyleBackColor = false;
-            button6.Click += button6_Click;
+            button6.MouseDown += button6_MouseDown;
+            // 
+            // richTextBox2
+            // 
+            richTextBox2.Location = new Point(46, 185);
+            richTextBox2.Name = "richTextBox2";
+            richTextBox2.Size = new Size(588, 263);
+            richTextBox2.TabIndex = 8;
+            richTextBox2.Text = "";
+            richTextBox2.TextChanged += richTextBox2_TextChanged;
+            // 
+            // richTextBox3
+            // 
+            richTextBox3.Location = new Point(646, 185);
+            richTextBox3.Name = "richTextBox3";
+            richTextBox3.Size = new Size(573, 263);
+            richTextBox3.TabIndex = 9;
+            richTextBox3.Text = "";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1254, 450);
+            Controls.Add(richTextBox3);
+            Controls.Add(richTextBox2);
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
@@ -177,5 +198,7 @@
         private Button button4;
         private Button button5;
         private Button button6;
+        private RichTextBox richTextBox2;
+        private RichTextBox richTextBox3;
     }
 }

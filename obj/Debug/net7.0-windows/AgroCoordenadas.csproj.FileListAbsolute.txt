@@ -28,3 +28,9 @@ C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\Tessera
 C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\nl\PdfiumViewer.resources.dll
 C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.csproj.AssemblyReference.cache
 C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.csproj.CopyComplete
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\.gitmodules
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\configs
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\eng.traineddata
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\LICENSE
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\pdf.ttf
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\por.traineddata
