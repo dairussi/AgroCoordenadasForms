@@ -1,0 +1,17 @@
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\AgroCoordenadas.exe
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\AgroCoordenadas.deps.json
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\AgroCoordenadas.runtimeconfig.json
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\AgroCoordenadas.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\AgroCoordenadas.pdb
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.Form1.resources
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.csproj.GenerateResource.cache
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.AssemblyInfoInputs.cache
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.AssemblyInfo.cs
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.csproj.CoreCompileInputs.cache
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\refint\AgroCoordenadas.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.pdb
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.genruntimeconfig.cache
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\ref\AgroCoordenadas.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\obj\Debug\net7.0-windows\AgroCoordenadas.Properties.Resources.resources
