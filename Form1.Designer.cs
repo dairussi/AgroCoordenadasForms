@@ -157,9 +157,9 @@
             // 
             // richTextBox3
             // 
-            richTextBox3.Location = new Point(646, 185);
+            richTextBox3.Location = new Point(640, 185);
             richTextBox3.Name = "richTextBox3";
-            richTextBox3.Size = new Size(573, 263);
+            richTextBox3.Size = new Size(851, 352);
             richTextBox3.TabIndex = 9;
             richTextBox3.Text = "";
             // 
@@ -168,7 +168,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1254, 450);
+            ClientSize = new Size(1503, 450);
             Controls.Add(richTextBox3);
             Controls.Add(richTextBox2);
             Controls.Add(button6);

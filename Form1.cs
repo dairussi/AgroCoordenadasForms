@@ -21,6 +21,7 @@ namespace AgroCoordenadas
             _filter = new FilterService();
         }
 
+
         private string FormatNFilterResult(Dictionary<string, List<string>> results)
         {
             List<string> nArray = results.ContainsKey("N") ? results["N"] : new List<string>();
@@ -33,7 +34,7 @@ namespace AgroCoordenadas
                 for (int i = 0; i < maxItems; i++)
                 {
                     string n = nArray[i];
-                    string formattedN = FormatValueUtm(n); // Create a FormatValueUtm method if needed
+                    string formattedN = FormatValueUtm(n);
                     resultString.AppendLine(formattedN);
                 }
             }
@@ -53,7 +54,7 @@ namespace AgroCoordenadas
                 for (int i = 0; i < maxItems; i++)
                 {
                     string e = eArray[i];
-                    string formattedE = FormatValueUtm(e); // Create a FormatValueUtm method if needed
+                    string formattedE = FormatValueUtm(e);
                     resultString.AppendLine(formattedE);
                 }
             }
@@ -103,34 +104,30 @@ namespace AgroCoordenadas
 
         private string CombineContent(Dictionary<string, List<string>> results)
         {
-            string eResultString = FormatEFilterResult(results);
-            string nResultString = FormatNFilterResult(results);
-            string longResultString = FormatLongFilterResult(results);
-            string latResultString = FormatLatFilterResult(results);
+            List<string> eLines = results.ContainsKey("E") ? results["E"] : new List<string>();
+            List<string> nLines = results.ContainsKey("N") ? results["N"] : new List<string>();
+            List<string> latLines = results.ContainsKey("Latitude") ? results["Latitude"] : new List<string>();
+            List<string> longLines = results.ContainsKey("Longitude") ? results["Longitude"] : new List<string>();
 
-            string[] eLines = eResultString.Split('\n');
-            string[] nLines = nResultString.Split('\n');
-            string[] longLines = longResultString.Split('\n');
-            string[] latLines = latResultString.Split('\n');
+            int maxLines = Math.Max(Math.Max(eLines.Count, nLines.Count), Math.Max(latLines.Count, longLines.Count));
+            StringBuilder resultString = new StringBuilder();
 
-            List<string> combinedLines = new List<string>();
-            int maxLines = Math.Max(Math.Max(eLines.Length, nLines.Length), Math.Max(longLines.Length, latLines.Length));
+            resultString.AppendLine("E\tN\tLat\tLong");
 
             for (int i = 0; i < maxLines; i++)
             {
-                string eLine = i < eLines.Length ? eLines[i] : "";
-                string nLine = i < nLines.Length ? nLines[i] : "";
-                string longLine = i < longLines.Length ? longLines[i] : "";
-                string latLine = i < latLines.Length ? latLines[i] : "";
+                string eLine = i < eLines.Count ? eLines[i] : "";
+                string nLine = i < nLines.Count ? nLines[i] : "";
+                string latLine = i < latLines.Count ? latLines[i] : "";
+                string longLine = i < longLines.Count ? longLines[i] : "";
 
-                if (!string.IsNullOrWhiteSpace(nLine) || !string.IsNullOrWhiteSpace(eLine) || !string.IsNullOrWhiteSpace(latLine) || !string.IsNullOrWhiteSpace(longLine))
-                {
-                    combinedLines.Add($"{eLine}{nLine}{longLine}{latLine}");
-                }
+                resultString.AppendLine($"{eLine}\t{nLine}\t{latLine}\t{longLine}");
             }
 
-            return string.Join("\n", combinedLines);
+            return resultString.ToString();
         }
+
+
 
         private string FormatValueUtm(string value)
         {
