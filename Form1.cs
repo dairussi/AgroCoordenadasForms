@@ -160,8 +160,34 @@ namespace AgroCoordenadas
             }
             else
             {
+                bool isSelectablePdf = IsSelectablePdf(tempFilePath);
 
+                if (isSelectablePdf)
+                {
+                    List<string> textFromPdfText = PdfText(tempFilePath);
+                    List<string> textFromPdfImg = PdfImg(tempFilePath);
+
+                    if (textFromPdfText.Count > textFromPdfImg.Count)
+                    {
+                        texts = textFromPdfText;
+                    }
+                    else
+                    {
+                        texts = textFromPdfImg;
+                    }
+                }
+                else
+                {
+                    List<string> textFromPdfImg = PdfImg(tempFilePath);
+                    texts = textFromPdfImg;
+                }
+                richTextBox1.Text = string.Join(Environment.NewLine, texts);
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
