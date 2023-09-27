@@ -34,3 +34,14 @@ C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdat
 C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\LICENSE
 C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\pdf.ttf
 C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\tessdata\por.traineddata
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\Enums.NET.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\MathNet.Numerics.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\NPOI.Core.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\NPOI.OOXML.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\NPOI.OpenXml4Net.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\NPOI.OpenXmlFormats.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\ICSharpCode.SharpZipLib.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\SixLabors.Fonts.dll
+C:\Users\DaiaRussi\source\repos\AgroCoordenadas\bin\Debug\net7.0-windows\SixLabors.ImageSharp.dll

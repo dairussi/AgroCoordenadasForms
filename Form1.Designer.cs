@@ -126,6 +126,7 @@ namespace AgroCoordenadas
             button4.Size = new Size(34, 34);
             button4.TabIndex = 5;
             button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // button5
             // 
@@ -249,10 +250,8 @@ namespace AgroCoordenadas
         private Button button4;
         private Button button5;
         private Button button6;
-        private Panel panel1;
         private Panel panel2;
         private RichTextBox richTextBox2;
-        private TableLayoutPanel tableLayoutPanel1;
         private RichTextBox richTextBox4;
         private RichTextBox richTextBox5;
         private RichTextBox richTextBox6;

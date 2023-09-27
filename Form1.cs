@@ -3,11 +3,10 @@ using iTextSharp.text.pdf.parser;
 using System.Text;
 using Tesseract;
 using PdfiumViewer;
-using System.Drawing;
 using AgroCoordenadas.Interface;
 using AgroCoordenadas.Service;
-using System.Windows.Forms;
 using static AgroCoordenadas.Service.FilterService;
+using NPOI.HSSF.UserModel;
 
 namespace AgroCoordenadas
 {
@@ -17,10 +16,10 @@ namespace AgroCoordenadas
         private static List<string> texts = new List<string>();
         private readonly IFilter _filter;
         private VScrollBar vScrollBar1;
-        private string eResult = null;
-        private string nResult = null;
-        private string latResult = null;
-        private string longResult = null;
+        private string? eResult = null;
+        private string? nResult = null;
+        private string? latResult = null;
+        private string? longResult = null;
 
 
 
@@ -365,62 +364,83 @@ namespace AgroCoordenadas
             }
         }
 
-        private string CombineContent(string eResultString, string nResultString, string longResultString, string latResultString)
-        {
-            string[] eLines = eResultString.Split('\n');
-            string[] nLines = nResultString.Split('\n');
-            string[] longLines = longResultString.Split('\n');
-            string[] latLines = latResultString.Split('\n');
 
+
+        private string CombineContent()
+        {
+            string[] eLines = this.eResult.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string[] nLines = this.nResult.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string[] longLines = this.latResult.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string[] latLines = this.longResult.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             StringBuilder combinedContent = new StringBuilder();
 
-            int maxLines = Math.Max(Math.Max(eLines.Length, nLines.Length), Math.Max(longLines.Length, latLines.Length));
+            int maxLines = Math.Max(
+                Math.Max(eLines.Length, nLines.Length),
+                Math.Max(longLines.Length, latLines.Length)
+            );
 
             for (int i = 0; i < maxLines; i++)
             {
-                if (i < eLines.Length) combinedContent.Append(eLines[i]);
-                if (i < nLines.Length) combinedContent.Append(nLines[i]);
-                if (i < longLines.Length) combinedContent.Append(longLines[i]);
-                if (i < latLines.Length) combinedContent.Append(latLines[i]);
-            }
+                if (i < eLines.Length && !string.IsNullOrWhiteSpace(eLines[i]))
+                {
+                    combinedContent.Append(eLines[i].Trim());
+                }
+                if (i < nLines.Length && !string.IsNullOrWhiteSpace(nLines[i]))
+                {
+                    combinedContent.Append(nLines[i].Trim());
+                }
+                if (i < longLines.Length && !string.IsNullOrWhiteSpace(longLines[i]))
+                {
+                    combinedContent.Append(longLines[i].Trim());
+                }
+                if (i < latLines.Length && !string.IsNullOrWhiteSpace(latLines[i]))
+                {
+                    combinedContent.Append(latLines[i].Trim());
+                }
 
+                combinedContent.AppendLine();
+            }
             return combinedContent.ToString();
         }
 
 
-        //private string CombineContent(string eResultString, string nResultString, string longResultString, string latResultString)
-        //{
-        //    string[] eLines = eResultString.Split('\n');
-        //    string[] nLines = nResultString.Split('\n');
-        //    string[] longLines = longResultString.Split('\n');
-        //    string[] latLines = latResultString.Split('\n');
-
-        //    List<string> combinedLines = new List<string>();
-        //    int maxLines = Math.Max(Math.Max(eLines.Length, nLines.Length), Math.Max(longLines.Length, latLines.Length));
-
-        //    for (int i = 0; i < maxLines; i++)
-        //    {
-        //        string eLine = i < eLines.Length ? eLines[i] : "";
-        //        string nLine = i < nLines.Length ? nLines[i] : "";
-        //        string longLine = i < longLines.Length ? longLines[i] : "";
-        //        string latLine = i < latLines.Length ? latLines[i] : "";
-
-        //        if (!string.IsNullOrEmpty(nLine) || !string.IsNullOrEmpty(eLine) || !string.IsNullOrEmpty(latLine) || !string.IsNullOrEmpty(longLine))
-        //        {
-        //            combinedLines.Add($"{eLine}{nLine}{longLine}{latLine}");
-        //        }
-        //    }
-
-        //    return string.Join("\n", combinedLines);
-        //}
         private void CopyToClipboard()
         {
-            string contentToCopy = CombineContent(eResult, nResult, latResult, longResult);
+            string contentToCopy = CombineContent();
             Clipboard.SetText(contentToCopy);
-
-
             MessageBox.Show("Conteúdo copiado para a área de transferência.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        public void SaveToExcel()
+        {
+            var cellData = CombineContent().Split('\n');
+            var workbook = new HSSFWorkbook();
+            var sheet = workbook.CreateSheet("Planilha");
+
+            for (int i = 0; i < cellData.Length; i++)
+            {
+                var row = sheet.CreateRow(i);
+                row.CreateCell(0).SetCellValue(cellData[i]);
+            }
+
+            using (var sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Excel files (*.xls)|*.xls";
+                sfd.FilterIndex = 2;
+                sfd.RestoreDirectory = true;
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (var fileStream = new FileStream(sfd.FileName, FileMode.Create))
+                    {
+                        workbook.Write(fileStream);
+                    }
+                }
+            }
+
+            MessageBox.Show("Conteúdo salvo", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -431,6 +451,12 @@ namespace AgroCoordenadas
         private void button5_Click(object sender, EventArgs e)
         {
             CopyToClipboard();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SaveToExcel();
         }
     }
 }
