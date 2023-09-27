@@ -216,6 +216,34 @@ namespace AgroCoordenadas
 
             return results;
         }
+        private void HighlightFilteredText()
+        {
+          
+            string[] keywordsToHighlight = new string[] { "E;", "N", "Latitude;", "Longitude" };
+            Color highlightColor = Color.LightGreen;
+            foreach (string keyword in keywordsToHighlight)
+            {
+                int startIndex = 0;
+                while (startIndex < richTextBox2.TextLength)
+                {
+                    int wordStartIndex = richTextBox2.Find(keyword, startIndex, RichTextBoxFinds.WholeWord);
+
+                    if (wordStartIndex != -1)
+                    {
+                        int wordEndIndex = wordStartIndex + keyword.Length;
+                        richTextBox2.SelectionStart = wordStartIndex;
+                        richTextBox2.SelectionLength = keyword.Length;
+                        richTextBox2.SelectionBackColor = highlightColor;
+                        startIndex = wordEndIndex;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
         private int CalculateRichTextBoxHeight(RichTextBox richTextBox)
         {
             using (Graphics g = richTextBox.CreateGraphics())
@@ -337,6 +365,7 @@ namespace AgroCoordenadas
                         texts = textFromPdfImg;
                     }
                     richTextBox2.Text = string.Join(Environment.NewLine, texts);
+                    HighlightFilteredText();
 
                     FilteredData filteredData = ApplyFilter(texts);
 
@@ -406,6 +435,10 @@ namespace AgroCoordenadas
 
         private void CopyToClipboard()
         {
+            eResult = richTextBox4.Text;
+            nResult = richTextBox5.Text;
+            latResult = richTextBox6.Text;
+            longResult = richTextBox7.Text;
             string contentToCopy = CombineContent();
             Clipboard.SetText(contentToCopy);
             MessageBox.Show("Conteúdo copiado para a área de transferência.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -413,6 +446,10 @@ namespace AgroCoordenadas
 
         public void SaveToExcel()
         {
+            eResult = richTextBox4.Text;
+            nResult = richTextBox5.Text;
+            latResult = richTextBox6.Text;
+            longResult = richTextBox7.Text;
             var cellData = CombineContent().Split('\n');
             var workbook = new HSSFWorkbook();
             var sheet = workbook.CreateSheet("Planilha");
@@ -428,6 +465,7 @@ namespace AgroCoordenadas
                 sfd.Filter = "Excel files (*.xls)|*.xls";
                 sfd.FilterIndex = 2;
                 sfd.RestoreDirectory = true;
+                sfd.FileName = "dados.xls";
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
