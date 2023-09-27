@@ -7,6 +7,7 @@ using System.Drawing;
 using AgroCoordenadas.Interface;
 using AgroCoordenadas.Service;
 using System.Windows.Forms;
+using static AgroCoordenadas.Service.FilterService;
 
 namespace AgroCoordenadas
 {
@@ -16,6 +17,12 @@ namespace AgroCoordenadas
         private static List<string> texts = new List<string>();
         private readonly IFilter _filter;
         private VScrollBar vScrollBar1;
+        private string eResult = null;
+        private string nResult = null;
+        private string latResult = null;
+        private string longResult = null;
+
+
 
         public Form1()
         {
@@ -174,9 +181,9 @@ namespace AgroCoordenadas
         }
 
 
-        private FilterService.FilteredData ApplyFilter(List<string> texts)
+        private FilteredData ApplyFilter(List<string> texts)
         {
-            FilterService.FilteredData results = new FilterService.FilteredData();
+            FilteredData results = new FilteredData();
 
             foreach (var text in texts)
             {
@@ -218,10 +225,88 @@ namespace AgroCoordenadas
                 return (int)Math.Ceiling(preferredSize.Height);
             }
         }
+
+        private string EFilterResult(FilteredData data)
+        {
+            List<string> eArray = data.E ?? new List<string>();
+            StringBuilder resultString = new StringBuilder();
+
+            if (eArray.Count > 0)
+            {
+                resultString.AppendLine("E;");
+                foreach (string e in eArray)
+                {
+                    string formattedE = e;
+                    resultString.AppendLine(formattedE + ";");
+                }
+            }
+
+            return resultString.ToString();
+        }
+
+        private string NFilterResult(FilteredData data)
+        {
+            List<string> nArray = data.N ?? new List<string>();
+            StringBuilder resultString = new StringBuilder();
+
+            if (nArray.Count > 0)
+            {
+                resultString.AppendLine("N");
+                foreach (string n in nArray)
+                {
+                    string formattedN = n;
+                    resultString.AppendLine(formattedN);
+                }
+
+            }
+
+            return resultString.ToString();
+        }
+
+        private string LatitudeFilterResult(FilteredData data)
+        {
+            List<string> latArray = data.Latitude ?? new List<string>();
+            StringBuilder resultString = new StringBuilder();
+
+            if (latArray.Count > 0)
+            {
+                resultString.AppendLine("Latitude;");
+                foreach (string lat in latArray)
+                {
+                    string formattedLat = lat;
+                    resultString.AppendLine(formattedLat + ";");
+                }
+            }
+
+            return resultString.ToString();
+        }
+
+
+        private string LongitudeFilterResult(FilteredData data)
+        {
+            List<string> longArray = data.Longitude ?? new List<string>();
+            StringBuilder resultString = new StringBuilder();
+
+            if (longArray.Count > 0)
+            {
+
+                resultString.AppendLine("Longitude");
+                foreach (string longi in longArray)
+                {
+                    string formattedLong = longi;
+                    resultString.AppendLine(formattedLong);
+                }
+
+
+            }
+
+            return resultString.ToString();
+        }
+
+
         private void button6_MouseDown(object sender, EventArgs e)
         {
             button6.MouseDown -= button6_MouseDown;
-
 
             if (string.IsNullOrEmpty(tempFilePath))
             {
@@ -254,18 +339,23 @@ namespace AgroCoordenadas
                     }
                     richTextBox2.Text = string.Join(Environment.NewLine, texts);
 
-                    FilterService.FilteredData filteredData = ApplyFilter(texts);
-                   
+                    FilteredData filteredData = ApplyFilter(texts);
 
-                    richTextBox4.Text = string.Join("\n", filteredData.E);
-                    richTextBox5.Text = string.Join("\n", filteredData.N);
-                    richTextBox6.Text = string.Join("\n", filteredData.Longitude);
-                    richTextBox7.Text = string.Join("\n", filteredData.Latitude);
+
+                    richTextBox4.Text = EFilterResult(filteredData);
+                    richTextBox5.Text = NFilterResult(filteredData);
+                    richTextBox6.Text = LatitudeFilterResult(filteredData);
+                    richTextBox7.Text = LongitudeFilterResult(filteredData);
 
                     richTextBox4.Height = (int)(CalculateRichTextBoxHeight(richTextBox4) * 1.2);
                     richTextBox5.Height = (int)(CalculateRichTextBoxHeight(richTextBox5) * 1.2);
                     richTextBox6.Height = (int)(CalculateRichTextBoxHeight(richTextBox6) * 1.2);
                     richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
+
+                    eResult = EFilterResult(filteredData);
+                    nResult = NFilterResult(filteredData);
+                    latResult = LatitudeFilterResult(filteredData);
+                    longResult = LongitudeFilterResult(filteredData);
 
                 }
                 finally
@@ -275,11 +365,72 @@ namespace AgroCoordenadas
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private string CombineContent(string eResultString, string nResultString, string longResultString, string latResultString)
         {
+            string[] eLines = eResultString.Split('\n');
+            string[] nLines = nResultString.Split('\n');
+            string[] longLines = longResultString.Split('\n');
+            string[] latLines = latResultString.Split('\n');
 
+            StringBuilder combinedContent = new StringBuilder();
+
+            int maxLines = Math.Max(Math.Max(eLines.Length, nLines.Length), Math.Max(longLines.Length, latLines.Length));
+
+            for (int i = 0; i < maxLines; i++)
+            {
+                if (i < eLines.Length) combinedContent.Append(eLines[i]);
+                if (i < nLines.Length) combinedContent.Append(nLines[i]);
+                if (i < longLines.Length) combinedContent.Append(longLines[i]);
+                if (i < latLines.Length) combinedContent.Append(latLines[i]);
+            }
+
+            return combinedContent.ToString();
         }
 
 
+        //private string CombineContent(string eResultString, string nResultString, string longResultString, string latResultString)
+        //{
+        //    string[] eLines = eResultString.Split('\n');
+        //    string[] nLines = nResultString.Split('\n');
+        //    string[] longLines = longResultString.Split('\n');
+        //    string[] latLines = latResultString.Split('\n');
+
+        //    List<string> combinedLines = new List<string>();
+        //    int maxLines = Math.Max(Math.Max(eLines.Length, nLines.Length), Math.Max(longLines.Length, latLines.Length));
+
+        //    for (int i = 0; i < maxLines; i++)
+        //    {
+        //        string eLine = i < eLines.Length ? eLines[i] : "";
+        //        string nLine = i < nLines.Length ? nLines[i] : "";
+        //        string longLine = i < longLines.Length ? longLines[i] : "";
+        //        string latLine = i < latLines.Length ? latLines[i] : "";
+
+        //        if (!string.IsNullOrEmpty(nLine) || !string.IsNullOrEmpty(eLine) || !string.IsNullOrEmpty(latLine) || !string.IsNullOrEmpty(longLine))
+        //        {
+        //            combinedLines.Add($"{eLine}{nLine}{longLine}{latLine}");
+        //        }
+        //    }
+
+        //    return string.Join("\n", combinedLines);
+        //}
+        private void CopyToClipboard()
+        {
+            string contentToCopy = CombineContent(eResult, nResult, latResult, longResult);
+            Clipboard.SetText(contentToCopy);
+
+
+            MessageBox.Show("Conteúdo copiado para a área de transferência.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            richTextBox4.SelectionAlignment = HorizontalAlignment.Right;
+            richTextBox6.SelectionAlignment = HorizontalAlignment.Right;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            CopyToClipboard();
+        }
     }
 }

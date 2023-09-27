@@ -139,6 +139,7 @@ namespace AgroCoordenadas
             button5.Size = new Size(34, 34);
             button5.TabIndex = 6;
             button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
             // 
             // button6
             // 
@@ -167,7 +168,7 @@ namespace AgroCoordenadas
             richTextBox4.BorderStyle = BorderStyle.None;
             richTextBox4.Location = new Point(11, 9);
             richTextBox4.Name = "richTextBox4";
-            richTextBox4.RightToLeft = RightToLeft.Yes;
+            richTextBox4.RightToLeft = RightToLeft.No;
             richTextBox4.Size = new Size(140, 580);
             richTextBox4.TabIndex = 9;
             richTextBox4.Text = "";
@@ -186,7 +187,7 @@ namespace AgroCoordenadas
             richTextBox6.BorderStyle = BorderStyle.None;
             richTextBox6.Location = new Point(306, 9);
             richTextBox6.Name = "richTextBox6";
-            richTextBox6.RightToLeft = RightToLeft.Yes;
+            richTextBox6.RightToLeft = RightToLeft.No;
             richTextBox6.Size = new Size(140, 580);
             richTextBox6.TabIndex = 11;
             richTextBox6.Text = "";
