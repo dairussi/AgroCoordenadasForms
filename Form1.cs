@@ -6,6 +6,7 @@ using PdfiumViewer;
 using System.Drawing;
 using AgroCoordenadas.Interface;
 using AgroCoordenadas.Service;
+using System.Windows.Forms;
 
 namespace AgroCoordenadas
 {
@@ -14,147 +15,38 @@ namespace AgroCoordenadas
         private string tempFilePath = "";
         private static List<string> texts = new List<string>();
         private readonly IFilter _filter;
+        private VScrollBar vScrollBar1;
 
         public Form1()
         {
             InitializeComponent();
             _filter = new FilterService();
+
+
+            richTextBox4.ScrollBars = RichTextBoxScrollBars.None;
+            richTextBox5.ScrollBars = RichTextBoxScrollBars.None;
+            richTextBox6.ScrollBars = RichTextBoxScrollBars.None;
+            richTextBox7.ScrollBars = RichTextBoxScrollBars.None;
+            panel3.AutoScroll = true;
+            vScrollBar1 = new VScrollBar();
+            vScrollBar1.Dock = DockStyle.Right;
+            vScrollBar1.Scroll += new ScrollEventHandler(vScrollBar1_Scroll);
+            panel3.Controls.Add(richTextBox5);
+            panel3.Controls.Add(richTextBox6);
+            panel3.Controls.Add(richTextBox7);
+            panel3.Controls.Add(richTextBox4);
+
+            this.Controls.Add(panel3);
+            this.Controls.Add(vScrollBar1);
+
+
+
         }
-
-
-        private string FormatNFilterResult(Dictionary<string, List<string>> results)
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            List<string> nArray = results.ContainsKey("N") ? results["N"] : new List<string>();
-            int maxItems = nArray.Count;
-            StringBuilder resultString = new StringBuilder();
 
-            if (maxItems > 0)
-            {
-                resultString.AppendLine("N");
-                for (int i = 0; i < maxItems; i++)
-                {
-                    string n = nArray[i];
-                    string formattedN = FormatValueUtm(n);
-                    resultString.AppendLine(formattedN);
-                }
-            }
-
-            return resultString.ToString();
+            panel3.VerticalScroll.Value = e.NewValue;
         }
-
-        private string FormatEFilterResult(Dictionary<string, List<string>> results)
-        {
-            List<string> eArray = results.ContainsKey("E") ? results["E"] : new List<string>();
-            int maxItems = eArray.Count;
-            StringBuilder resultString = new StringBuilder();
-
-            if (maxItems > 0)
-            {
-                resultString.AppendLine("E;");
-                for (int i = 0; i < maxItems; i++)
-                {
-                    string e = eArray[i];
-                    string formattedE = FormatValueUtm(e);
-                    resultString.AppendLine(formattedE);
-                }
-            }
-
-            return resultString.ToString();
-        }
-
-        private string FormatLatFilterResult(Dictionary<string, List<string>> results)
-        {
-            List<string> latitudeArray = results.ContainsKey("Latitude") ? results["Latitude"] : new List<string>();
-            int maxItems = latitudeArray.Count;
-            StringBuilder resultString = new StringBuilder();
-
-            if (maxItems > 0)
-            {
-                resultString.AppendLine("Latitude");
-                for (int i = 0; i < maxItems; i++)
-                {
-                    string latitude = latitudeArray[i];
-                    string formattedLatitude = FormatValueLatLong(latitude);
-                    resultString.AppendLine(formattedLatitude);
-                }
-            }
-
-            return resultString.ToString();
-        }
-
-        private string FormatLongFilterResult(Dictionary<string, List<string>> results)
-        {
-            List<string> longitudeArray = results.ContainsKey("Longitude") ? results["Longitude"] : new List<string>();
-            int maxItems = longitudeArray.Count;
-            StringBuilder resultString = new StringBuilder();
-
-            if (maxItems > 0)
-            {
-                resultString.AppendLine("Longitude;");
-                for (int i = 0; i < maxItems; i++)
-                {
-                    string longitude = longitudeArray[i];
-                    string formattedLongitude = FormatValueLatLong(longitude);
-                    resultString.AppendLine(formattedLongitude);
-                }
-            }
-
-            return resultString.ToString();
-        }
-
-        private string CombineContent(Dictionary<string, List<string>> results)
-        {
-            List<string> eLines = results.ContainsKey("E") ? results["E"] : new List<string>();
-            List<string> nLines = results.ContainsKey("N") ? results["N"] : new List<string>();
-            List<string> latLines = results.ContainsKey("Latitude") ? results["Latitude"] : new List<string>();
-            List<string> longLines = results.ContainsKey("Longitude") ? results["Longitude"] : new List<string>();
-
-            int maxLines = Math.Max(Math.Max(eLines.Count, nLines.Count), Math.Max(latLines.Count, longLines.Count));
-            StringBuilder resultString = new StringBuilder();
-
-            resultString.AppendLine("E\tN\tLat\tLong");
-
-            for (int i = 0; i < maxLines; i++)
-            {
-                string eLine = i < eLines.Count ? eLines[i] : "";
-                string nLine = i < nLines.Count ? nLines[i] : "";
-                string latLine = i < latLines.Count ? latLines[i] : "";
-                string longLine = i < longLines.Count ? longLines[i] : "";
-
-                resultString.AppendLine($"{eLine}\t{nLine}\t{latLine}\t{longLine}");
-            }
-
-            return resultString.ToString();
-        }
-
-
-
-        private string FormatValueUtm(string value)
-        {
-            string formattedValue = value;
-            if (formattedValue.Length > 4)
-            {
-                string lastFour = formattedValue.Substring(formattedValue.Length - 4);
-                string everythingElse = formattedValue.Substring(0, formattedValue.Length - 4);
-                string lastFourFormatted = lastFour.Replace(",", ".");
-                string everythingElseFormatted = new string(everythingElse.Where(char.IsDigit).ToArray());
-                formattedValue = everythingElseFormatted + lastFourFormatted;
-            }
-            else
-            {
-                formattedValue = formattedValue.Replace(",", "").TrimEnd();
-            }
-            return formattedValue;
-        }
-
-        private string FormatValueLatLong(string value)
-        {
-            string formattedValue = value.Replace(".", ",");
-            string finalFormattedValue = formattedValue.Replace("º", "°");
-            return finalFormattedValue;
-        }
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             texts.Clear();
@@ -236,7 +128,6 @@ namespace AgroCoordenadas
             }
 
 
-            //converte pdf para imagens salva na pasta criada logo acima
             using (PdfiumViewer.PdfDocument pdfDocument = PdfiumViewer.PdfDocument.Load(tempFilePath))
             {
                 for (int pageNumber = 0; pageNumber < pdfDocument.PageCount; pageNumber++)
@@ -255,7 +146,6 @@ namespace AgroCoordenadas
                     }
                 }
             }
-
 
             File.Delete(tempFilePath);
 
@@ -284,31 +174,50 @@ namespace AgroCoordenadas
         }
 
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private FilterService.FilteredData ApplyFilter(List<string> texts)
         {
-
-        }
-
-        private Dictionary<string, List<string>> ApplyFilter(List<string> texts)
-        {
-            Dictionary<string, List<string>> results = new Dictionary<string, List<string>>();
+            FilterService.FilteredData results = new FilterService.FilteredData();
 
             foreach (var text in texts)
             {
                 var coordinates = _filter.Filter(text);
-                foreach (var kvp in coordinates)
+
+                if (coordinates.N != null)
                 {
-                    if (!results.ContainsKey(kvp.Key))
-                    {
-                        results[kvp.Key] = new List<string>();
-                    }
-                    results[kvp.Key].AddRange(kvp.Value);
+                    results.N ??= new List<string>();
+                    results.N.AddRange(coordinates.N);
+                }
+
+                if (coordinates.E != null)
+                {
+                    results.E ??= new List<string>();
+                    results.E.AddRange(coordinates.E);
+                }
+
+                if (coordinates.Latitude != null)
+                {
+                    results.Latitude ??= new List<string>();
+                    results.Latitude.AddRange(coordinates.Latitude);
+                }
+
+                if (coordinates.Longitude != null)
+                {
+                    results.Longitude ??= new List<string>();
+                    results.Longitude.AddRange(coordinates.Longitude);
                 }
             }
 
+
             return results;
         }
-
+        private int CalculateRichTextBoxHeight(RichTextBox richTextBox)
+        {
+            using (Graphics g = richTextBox.CreateGraphics())
+            {
+                SizeF preferredSize = g.MeasureString(richTextBox.Text, richTextBox.Font, richTextBox.Width);
+                return (int)Math.Ceiling(preferredSize.Height);
+            }
+        }
         private void button6_MouseDown(object sender, EventArgs e)
         {
             button6.MouseDown -= button6_MouseDown;
@@ -345,13 +254,23 @@ namespace AgroCoordenadas
                     }
                     richTextBox2.Text = string.Join(Environment.NewLine, texts);
 
-                    Dictionary<string, List<string>> filteredResults = ApplyFilter(texts);
-                    richTextBox3.Text = CombineContent(filteredResults);
+                    FilterService.FilteredData filteredData = ApplyFilter(texts);
+                   
+
+                    richTextBox4.Text = string.Join("\n", filteredData.E);
+                    richTextBox5.Text = string.Join("\n", filteredData.N);
+                    richTextBox6.Text = string.Join("\n", filteredData.Longitude);
+                    richTextBox7.Text = string.Join("\n", filteredData.Latitude);
+
+                    richTextBox4.Height = (int)(CalculateRichTextBoxHeight(richTextBox4) * 1.2);
+                    richTextBox5.Height = (int)(CalculateRichTextBoxHeight(richTextBox5) * 1.2);
+                    richTextBox6.Height = (int)(CalculateRichTextBoxHeight(richTextBox6) * 1.2);
+                    richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
+
                 }
                 finally
                 {
                     button6.Enabled = true;
-                    texts.Clear();
                 }
             }
         }
@@ -361,9 +280,6 @@ namespace AgroCoordenadas
 
         }
 
-        private void richTextBox2_TextChanged(object sender, EventArgs e)
-        {
 
-        }
     }
 }

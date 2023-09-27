@@ -1,14 +1,10 @@
-﻿using System;
+﻿using AgroCoordenadas.Service;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgroCoordenadas.Interface
 {
     internal interface IFilter
     {
-        Dictionary<string, List<string>> Filter(string text);
-
+        FilterService.FilteredData Filter(string text);
     }
 }

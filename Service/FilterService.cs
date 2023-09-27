@@ -10,7 +10,15 @@ namespace AgroCoordenadas.Service
 {
     internal class FilterService : IFilter
     {
-        public Dictionary<string, List<string>> Filter(string text)
+        public class FilteredData
+        {
+            public List<string>? N { get; set; }
+            public List<string>? E { get; set; }
+            public List<string>? Latitude { get; set; }
+            public List<string>? Longitude { get; set; }
+        }
+
+        public FilteredData Filter(string text)
         {
             string pattern1 = @"(?<=\s+N\s+|\(\s*N\s*|\s*N=\s*)([\d,.]+)";
             string pattern2 = @"(?<=\s+E\s+|\(\s*E\s*|\s*E=\s*)([\d,.]+)";
@@ -36,7 +44,7 @@ namespace AgroCoordenadas.Service
 
             foreach (Match match in matches1)
             {
-                string formattedValue = FormatValue(match.Value);
+                string formattedValue = FormatValueUtm(match.Value);
                 if (seenValues1.Add(formattedValue))
                 {
                     filteredNumbers1.Add(formattedValue);
@@ -48,7 +56,7 @@ namespace AgroCoordenadas.Service
 
             foreach (Match match in matches2)
             {
-                string formattedValue = FormatValue(match.Value);
+                string formattedValue = FormatValueUtm(match.Value);
                 if (seenValues2.Add(formattedValue))
                 {
                     filteredNumbers2.Add(formattedValue);
@@ -59,7 +67,7 @@ namespace AgroCoordenadas.Service
 
             foreach (Match match in matches3)
             {
-                string formattedValue = FormatValue(match.Value);
+                string formattedValue = FormatValueLatLong(match.Value);
                 if (seenValues3.Add(formattedValue))
                 {
                     filteredNumbers3.Add(formattedValue);
@@ -70,27 +78,47 @@ namespace AgroCoordenadas.Service
 
             foreach (Match match in matches4)
             {
-                string formattedValue = FormatValue(match.Value);
+                string formattedValue = FormatValueLatLong(match.Value);
                 if (seenValues4.Add(formattedValue))
                 {
                     filteredNumbers4.Add(formattedValue);
                 }
             }
 
-            Dictionary<string, List<string>> results = new Dictionary<string, List<string>>
+            FilteredData results = new FilteredData
             {
-                { "N", filteredNumbers1 },
-                { "E", filteredNumbers2 },
-                { "Latitude", filteredNumbers3 },
-                { "Longitude", filteredNumbers4 }
+                N = filteredNumbers1,
+                E = filteredNumbers2,
+                Latitude = filteredNumbers3,
+                Longitude = filteredNumbers4
             };
 
             return results;
         }
 
-        private string FormatValue(string value)
+        private string FormatValueUtm(string value)
         {
             string formattedValue = value.Replace(" ", "");
+            if (formattedValue.Length > 4)
+            {
+                string lastFour = formattedValue.Substring(formattedValue.Length - 4);
+                string everythingElse = formattedValue.Substring(0, formattedValue.Length - 4);
+                lastFour = Regex.Replace(lastFour, @"[.,]", ",");
+                everythingElse = Regex.Replace(everythingElse, @"[^\d]", "");
+                formattedValue = everythingElse + lastFour;
+            }
+            else
+            {
+                formattedValue = formattedValue.TrimEnd('.', ',');
+            }
+            return formattedValue;
+        }
+
+        private string FormatValueLatLong(string value)
+        {
+
+            string formattedValue = value.Replace(" ", "");
+            formattedValue = formattedValue.Replace(".", ",");
             return formattedValue;
         }
     }

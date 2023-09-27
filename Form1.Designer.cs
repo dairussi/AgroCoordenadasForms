@@ -1,4 +1,6 @@
-﻿namespace AgroCoordenadas
+﻿using System.Windows.Forms;
+
+namespace AgroCoordenadas
 {
     partial class Form1
     {
@@ -39,8 +41,13 @@
             button5 = new Button();
             button6 = new Button();
             richTextBox2 = new RichTextBox();
-            richTextBox3 = new RichTextBox();
+            richTextBox4 = new RichTextBox();
+            richTextBox5 = new RichTextBox();
+            richTextBox6 = new RichTextBox();
+            richTextBox7 = new RichTextBox();
+            panel3 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -50,7 +57,7 @@
             button1.BackgroundImageLayout = ImageLayout.Stretch;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.Transparent;
-            button1.Location = new Point(405, 88);
+            button1.Location = new Point(605, 99);
             button1.Name = "button1";
             button1.Size = new Size(34, 34);
             button1.TabIndex = 0;
@@ -60,7 +67,8 @@
             // richTextBox1
             // 
             richTextBox1.BackColor = Color.White;
-            richTextBox1.Location = new Point(116, 84);
+            richTextBox1.BorderStyle = BorderStyle.FixedSingle;
+            richTextBox1.Location = new Point(316, 95);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(280, 44);
             richTextBox1.TabIndex = 1;
@@ -69,13 +77,12 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.banner;
-            pictureBox1.Location = new Point(252, 14);
+            pictureBox1.Location = new Point(452, 25);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(303, 54);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // openFileDialog1
             // 
@@ -88,9 +95,9 @@
             button2.BackgroundImageLayout = ImageLayout.Stretch;
             button2.FlatStyle = FlatStyle.Flat;
             button2.ForeColor = Color.Transparent;
-            button2.Location = new Point(578, 157);
+            button2.Location = new Point(822, 100);
             button2.Name = "button2";
-            button2.Size = new Size(28, 28);
+            button2.Size = new Size(34, 34);
             button2.TabIndex = 3;
             button2.UseVisualStyleBackColor = false;
             // 
@@ -101,9 +108,9 @@
             button3.BackgroundImageLayout = ImageLayout.Stretch;
             button3.FlatStyle = FlatStyle.Flat;
             button3.ForeColor = Color.Transparent;
-            button3.Location = new Point(612, 157);
+            button3.Location = new Point(861, 100);
             button3.Name = "button3";
-            button3.Size = new Size(28, 28);
+            button3.Size = new Size(34, 34);
             button3.TabIndex = 4;
             button3.UseVisualStyleBackColor = false;
             // 
@@ -114,9 +121,9 @@
             button4.BackgroundImageLayout = ImageLayout.Stretch;
             button4.FlatStyle = FlatStyle.Flat;
             button4.ForeColor = Color.Transparent;
-            button4.Location = new Point(680, 157);
+            button4.Location = new Point(939, 100);
             button4.Name = "button4";
-            button4.Size = new Size(28, 28);
+            button4.Size = new Size(34, 34);
             button4.TabIndex = 5;
             button4.UseVisualStyleBackColor = false;
             // 
@@ -127,9 +134,9 @@
             button5.BackgroundImageLayout = ImageLayout.Stretch;
             button5.FlatStyle = FlatStyle.Flat;
             button5.ForeColor = Color.Transparent;
-            button5.Location = new Point(646, 157);
+            button5.Location = new Point(900, 100);
             button5.Name = "button5";
-            button5.Size = new Size(28, 28);
+            button5.Size = new Size(34, 34);
             button5.TabIndex = 6;
             button5.UseVisualStyleBackColor = false;
             // 
@@ -138,7 +145,7 @@
             button6.BackColor = Color.FromArgb(32, 41, 86);
             button6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             button6.ForeColor = Color.White;
-            button6.Location = new Point(454, 84);
+            button6.Location = new Point(654, 95);
             button6.Name = "button6";
             button6.Size = new Size(140, 44);
             button6.TabIndex = 7;
@@ -148,28 +155,69 @@
             // 
             // richTextBox2
             // 
-            richTextBox2.Location = new Point(46, 185);
+            richTextBox2.Location = new Point(20, 182);
             richTextBox2.Name = "richTextBox2";
-            richTextBox2.Size = new Size(588, 263);
-            richTextBox2.TabIndex = 8;
+            richTextBox2.RightToLeft = RightToLeft.No;
+            richTextBox2.Size = new Size(600, 600);
+            richTextBox2.TabIndex = 0;
             richTextBox2.Text = "";
-            richTextBox2.TextChanged += richTextBox2_TextChanged;
             // 
-            // richTextBox3
+            // richTextBox4
             // 
-            richTextBox3.Location = new Point(640, 185);
-            richTextBox3.Name = "richTextBox3";
-            richTextBox3.Size = new Size(851, 352);
-            richTextBox3.TabIndex = 9;
-            richTextBox3.Text = "";
+            richTextBox4.BorderStyle = BorderStyle.None;
+            richTextBox4.Location = new Point(11, 9);
+            richTextBox4.Name = "richTextBox4";
+            richTextBox4.RightToLeft = RightToLeft.Yes;
+            richTextBox4.Size = new Size(140, 580);
+            richTextBox4.TabIndex = 9;
+            richTextBox4.Text = "";
+            // 
+            // richTextBox5
+            // 
+            richTextBox5.BorderStyle = BorderStyle.None;
+            richTextBox5.Location = new Point(155, 9);
+            richTextBox5.Name = "richTextBox5";
+            richTextBox5.Size = new Size(140, 580);
+            richTextBox5.TabIndex = 10;
+            richTextBox5.Text = "";
+            // 
+            // richTextBox6
+            // 
+            richTextBox6.BorderStyle = BorderStyle.None;
+            richTextBox6.Location = new Point(306, 9);
+            richTextBox6.Name = "richTextBox6";
+            richTextBox6.RightToLeft = RightToLeft.Yes;
+            richTextBox6.Size = new Size(140, 580);
+            richTextBox6.TabIndex = 11;
+            richTextBox6.Text = "";
+            // 
+            // richTextBox7
+            // 
+            richTextBox7.BorderStyle = BorderStyle.None;
+            richTextBox7.Location = new Point(450, 9);
+            richTextBox7.Name = "richTextBox7";
+            richTextBox7.Size = new Size(140, 580);
+            richTextBox7.TabIndex = 12;
+            richTextBox7.Text = "";
+            // 
+            // panel3
+            // 
+            panel3.BorderStyle = BorderStyle.Fixed3D;
+            panel3.Controls.Add(richTextBox7);
+            panel3.Controls.Add(richTextBox6);
+            panel3.Controls.Add(richTextBox5);
+            panel3.Controls.Add(richTextBox4);
+            panel3.Location = new Point(634, 183);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(600, 600);
+            panel3.TabIndex = 13;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1503, 450);
-            Controls.Add(richTextBox3);
+            ClientSize = new Size(1254, 831);
             Controls.Add(richTextBox2);
             Controls.Add(button6);
             Controls.Add(button5);
@@ -179,11 +227,13 @@
             Controls.Add(pictureBox1);
             Controls.Add(button1);
             Controls.Add(richTextBox1);
+            Controls.Add(panel3);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "AgroCoordenadas";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -198,7 +248,14 @@
         private Button button4;
         private Button button5;
         private Button button6;
+        private Panel panel1;
+        private Panel panel2;
         private RichTextBox richTextBox2;
-        private RichTextBox richTextBox3;
+        private TableLayoutPanel tableLayoutPanel1;
+        private RichTextBox richTextBox4;
+        private RichTextBox richTextBox5;
+        private RichTextBox richTextBox6;
+        private RichTextBox richTextBox7;
+        private Panel panel3;
     }
 }
