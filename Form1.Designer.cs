@@ -33,7 +33,6 @@ namespace AgroCoordenadas
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             button1 = new Button();
             richTextBox1 = new RichTextBox();
-            pictureBox1 = new PictureBox();
             openFileDialog1 = new OpenFileDialog();
             button2 = new Button();
             button3 = new Button();
@@ -46,8 +45,11 @@ namespace AgroCoordenadas
             richTextBox6 = new RichTextBox();
             richTextBox7 = new RichTextBox();
             panel3 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -73,16 +75,6 @@ namespace AgroCoordenadas
             richTextBox1.Size = new Size(280, 44);
             richTextBox1.TabIndex = 1;
             richTextBox1.Text = "";
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.banner;
-            pictureBox1.Location = new Point(452, 25);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(303, 54);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
             // 
             // openFileDialog1
             // 
@@ -113,6 +105,7 @@ namespace AgroCoordenadas
             button3.Size = new Size(34, 34);
             button3.TabIndex = 4;
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
@@ -214,19 +207,37 @@ namespace AgroCoordenadas
             panel3.Size = new Size(600, 600);
             panel3.TabIndex = 13;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(100, 50);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackgroundImage = Properties.Resources.banner;
+            pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox2.Location = new Point(447, 23);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(314, 51);
+            pictureBox2.TabIndex = 14;
+            pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1254, 831);
+            Controls.Add(pictureBox2);
             Controls.Add(richTextBox2);
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
-            Controls.Add(pictureBox1);
             Controls.Add(button1);
             Controls.Add(richTextBox1);
             Controls.Add(panel3);
@@ -234,8 +245,9 @@ namespace AgroCoordenadas
             Name = "Form1";
             Text = "AgroCoordenadas";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -243,19 +255,19 @@ namespace AgroCoordenadas
 
         private Button button1;
         private RichTextBox richTextBox1;
-        private PictureBox pictureBox1;
         private OpenFileDialog openFileDialog1;
         private Button button2;
         private Button button3;
         private Button button4;
         private Button button5;
         private Button button6;
-        private Panel panel2;
         private RichTextBox richTextBox2;
         private RichTextBox richTextBox4;
         private RichTextBox richTextBox5;
         private RichTextBox richTextBox6;
         private RichTextBox richTextBox7;
         private Panel panel3;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }

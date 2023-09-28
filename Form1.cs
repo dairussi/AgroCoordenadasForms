@@ -7,28 +7,27 @@ using AgroCoordenadas.Interface;
 using AgroCoordenadas.Service;
 using static AgroCoordenadas.Service.FilterService;
 using NPOI.HSSF.UserModel;
+using System.Windows.Forms;
 
 namespace AgroCoordenadas
 {
     public partial class Form1 : Form
     {
         private string tempFilePath = "";
-        private static List<string> texts = new List<string>();
+        public static List<string> texts = new List<string>();
         private readonly IFilter _filter;
         private VScrollBar vScrollBar1;
         private string? eResult = null;
         private string? nResult = null;
         private string? latResult = null;
         private string? longResult = null;
-
+        FilteredData results = new FilteredData();
 
 
         public Form1()
         {
             InitializeComponent();
             _filter = new FilterService();
-
-
             richTextBox4.ScrollBars = RichTextBoxScrollBars.None;
             richTextBox5.ScrollBars = RichTextBoxScrollBars.None;
             richTextBox6.ScrollBars = RichTextBoxScrollBars.None;
@@ -182,7 +181,7 @@ namespace AgroCoordenadas
 
         private FilteredData ApplyFilter(List<string> texts)
         {
-            FilteredData results = new FilteredData();
+
 
             foreach (var text in texts)
             {
@@ -213,36 +212,9 @@ namespace AgroCoordenadas
                 }
             }
 
-
             return results;
         }
-        private void HighlightFilteredText()
-        {
-          
-            string[] keywordsToHighlight = new string[] { "E;", "N", "Latitude;", "Longitude" };
-            Color highlightColor = Color.LightGreen;
-            foreach (string keyword in keywordsToHighlight)
-            {
-                int startIndex = 0;
-                while (startIndex < richTextBox2.TextLength)
-                {
-                    int wordStartIndex = richTextBox2.Find(keyword, startIndex, RichTextBoxFinds.WholeWord);
 
-                    if (wordStartIndex != -1)
-                    {
-                        int wordEndIndex = wordStartIndex + keyword.Length;
-                        richTextBox2.SelectionStart = wordStartIndex;
-                        richTextBox2.SelectionLength = keyword.Length;
-                        richTextBox2.SelectionBackColor = highlightColor;
-                        startIndex = wordEndIndex;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }
 
         private int CalculateRichTextBoxHeight(RichTextBox richTextBox)
         {
@@ -335,6 +307,7 @@ namespace AgroCoordenadas
         {
             button6.MouseDown -= button6_MouseDown;
 
+
             if (string.IsNullOrEmpty(tempFilePath))
             {
                 MessageBox.Show("Selecione um arquivo PDF antes de continuar.");
@@ -365,9 +338,10 @@ namespace AgroCoordenadas
                         texts = textFromPdfImg;
                     }
                     richTextBox2.Text = string.Join(Environment.NewLine, texts);
-                    HighlightFilteredText();
+
 
                     FilteredData filteredData = ApplyFilter(texts);
+
 
 
                     richTextBox4.Text = EFilterResult(filteredData);
@@ -384,6 +358,8 @@ namespace AgroCoordenadas
                     nResult = NFilterResult(filteredData);
                     latResult = LatitudeFilterResult(filteredData);
                     longResult = LongitudeFilterResult(filteredData);
+
+
 
                 }
                 finally
@@ -495,6 +471,17 @@ namespace AgroCoordenadas
         private void button4_Click(object sender, EventArgs e)
         {
             SaveToExcel();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+            richTextBox2.Text = "";
+            richTextBox4.Text = "";
+            richTextBox5.Text = "";
+            richTextBox6.Text = "";
+            richTextBox4.Text = "";
+
         }
     }
 }
