@@ -1251,11 +1251,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DaiaRussi\\source\\repos\\AgroCoordenadas\\AgroCoordenadas.csproj",
+      "projectUniqueName": "C:\\Users\\DaiaRussi\\Documents\\AgroCoordenadasForms\\AgroCoordenadas.csproj",
       "projectName": "AgroCoordenadas",
-      "projectPath": "C:\\Users\\DaiaRussi\\source\\repos\\AgroCoordenadas\\AgroCoordenadas.csproj",
+      "projectPath": "C:\\Users\\DaiaRussi\\Documents\\AgroCoordenadasForms\\AgroCoordenadas.csproj",
       "packagesPath": "C:\\Users\\DaiaRussi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DaiaRussi\\source\\repos\\AgroCoordenadas\\obj\\",
+      "outputPath": "C:\\Users\\DaiaRussi\\Documents\\AgroCoordenadasForms\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

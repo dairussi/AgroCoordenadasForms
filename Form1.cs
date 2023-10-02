@@ -8,6 +8,7 @@ using AgroCoordenadas.Service;
 using static AgroCoordenadas.Service.FilterService;
 using NPOI.HSSF.UserModel;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace AgroCoordenadas
 {
@@ -55,6 +56,9 @@ namespace AgroCoordenadas
         private void button1_Click(object sender, EventArgs e)
         {
             texts.Clear();
+            eResult = nResult = latResult = longResult = null; 
+            results = new FilteredData();
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string filePath = openFileDialog1.FileName;
@@ -152,7 +156,6 @@ namespace AgroCoordenadas
                 }
             }
 
-            File.Delete(tempFilePath);
 
             Environment.SetEnvironmentVariable("TESSDATA_PREFIX", "./tessdata");
             using (TesseractEngine engine = new TesseractEngine("./tessdata", "eng", EngineMode.Default))
@@ -214,7 +217,6 @@ namespace AgroCoordenadas
 
             return results;
         }
-
 
         private int CalculateRichTextBoxHeight(RichTextBox richTextBox)
         {
@@ -311,6 +313,7 @@ namespace AgroCoordenadas
             if (string.IsNullOrEmpty(tempFilePath))
             {
                 MessageBox.Show("Selecione um arquivo PDF antes de continuar.");
+                button6.MouseDown += button6_MouseDown;
             }
             else
             {
@@ -341,30 +344,24 @@ namespace AgroCoordenadas
 
 
                     FilteredData filteredData = ApplyFilter(texts);
+                  
 
-
-
-                    richTextBox4.Text = EFilterResult(filteredData);
-                    richTextBox5.Text = NFilterResult(filteredData);
-                    richTextBox6.Text = LatitudeFilterResult(filteredData);
-                    richTextBox7.Text = LongitudeFilterResult(filteredData);
+                    richTextBox4.Text = eResult = EFilterResult(filteredData);
+                    richTextBox5.Text = nResult = NFilterResult(filteredData);
+                    richTextBox6.Text = latResult = LatitudeFilterResult(filteredData);
+                    richTextBox7.Text = longResult = LongitudeFilterResult(filteredData);
 
                     richTextBox4.Height = (int)(CalculateRichTextBoxHeight(richTextBox4) * 1.2);
                     richTextBox5.Height = (int)(CalculateRichTextBoxHeight(richTextBox5) * 1.2);
                     richTextBox6.Height = (int)(CalculateRichTextBoxHeight(richTextBox6) * 1.2);
                     richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
 
-                    eResult = EFilterResult(filteredData);
-                    nResult = NFilterResult(filteredData);
-                    latResult = LatitudeFilterResult(filteredData);
-                    longResult = LongitudeFilterResult(filteredData);
-
-
 
                 }
                 finally
                 {
                     button6.Enabled = true;
+                    button6.MouseDown += button6_MouseDown;
                 }
             }
         }
@@ -473,14 +470,18 @@ namespace AgroCoordenadas
             SaveToExcel();
         }
 
+
+
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = "";
-            richTextBox2.Text = "";
-            richTextBox4.Text = "";
-            richTextBox5.Text = "";
-            richTextBox6.Text = "";
-            richTextBox4.Text = "";
+            richTextBox1.Clear();
+            richTextBox2.Clear();
+            richTextBox4.Clear();   
+            richTextBox5.Clear();   
+            richTextBox6.Clear();
+            richTextBox7.Clear();
+            
+
 
         }
     }
