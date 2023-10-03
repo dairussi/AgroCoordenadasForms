@@ -29,10 +29,6 @@ namespace AgroCoordenadas
             InitializeComponent();
             _filter = new FilterService();
 
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,7 +48,7 @@ namespace AgroCoordenadas
             }
 
         }
-        //coments
+ 
         private bool IsSelectablePdf(string tempFilePath)
         {
             bool isSelectablePdf = false;
