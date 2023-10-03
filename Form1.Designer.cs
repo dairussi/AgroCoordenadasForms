@@ -169,20 +169,20 @@ namespace AgroCoordenadas
             richTextBox4.Location = new Point(11, 9);
             richTextBox4.Name = "richTextBox4";
             richTextBox4.RightToLeft = RightToLeft.No;
+            richTextBox4.ScrollBars = RichTextBoxScrollBars.None;
             richTextBox4.Size = new Size(140, 580);
             richTextBox4.TabIndex = 9;
             richTextBox4.Text = "";
-            richTextBox4.ScrollBars = RichTextBoxScrollBars.None;
             // 
             // richTextBox5
             // 
             richTextBox5.BorderStyle = BorderStyle.None;
             richTextBox5.Location = new Point(155, 9);
             richTextBox5.Name = "richTextBox5";
+            richTextBox5.ScrollBars = RichTextBoxScrollBars.None;
             richTextBox5.Size = new Size(140, 580);
             richTextBox5.TabIndex = 10;
             richTextBox5.Text = "";
-            richTextBox5.ScrollBars = RichTextBoxScrollBars.None;
             // 
             // richTextBox6
             // 
@@ -190,29 +190,30 @@ namespace AgroCoordenadas
             richTextBox6.Location = new Point(306, 9);
             richTextBox6.Name = "richTextBox6";
             richTextBox6.RightToLeft = RightToLeft.No;
+            richTextBox6.ScrollBars = RichTextBoxScrollBars.None;
             richTextBox6.Size = new Size(140, 580);
             richTextBox6.TabIndex = 11;
             richTextBox6.Text = "";
-            richTextBox6.ScrollBars = RichTextBoxScrollBars.None;
             // 
             // richTextBox7
             // 
             richTextBox7.BorderStyle = BorderStyle.None;
             richTextBox7.Location = new Point(450, 9);
             richTextBox7.Name = "richTextBox7";
+            richTextBox7.ScrollBars = RichTextBoxScrollBars.None;
             richTextBox7.Size = new Size(140, 580);
             richTextBox7.TabIndex = 12;
             richTextBox7.Text = "";
-            richTextBox7.ScrollBars = RichTextBoxScrollBars.None;
             // 
             // panel3
             // 
+            panel3.AutoScroll = true;
             panel3.BorderStyle = BorderStyle.Fixed3D;
             panel3.Controls.Add(richTextBox7);
             panel3.Controls.Add(richTextBox6);
             panel3.Controls.Add(richTextBox5);
             panel3.Controls.Add(richTextBox4);
-            panel3.Location = new Point(626, 248);
+            panel3.Location = new Point(635, 248);
             panel3.Name = "panel3";
             panel3.Size = new Size(600, 600);
             panel3.TabIndex = 13;
@@ -230,7 +231,7 @@ namespace AgroCoordenadas
             pictureBox2.Anchor = AnchorStyles.Top;
             pictureBox2.BackgroundImage = Properties.Resources.banner;
             pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox2.Location = new Point(415, 16);
+            pictureBox2.Location = new Point(405, 16);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(425, 77);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -244,7 +245,7 @@ namespace AgroCoordenadas
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1254, 96);
+            panel1.Size = new Size(1235, 96);
             panel1.TabIndex = 15;
             // 
             // tableLayoutPanel1
@@ -265,7 +266,7 @@ namespace AgroCoordenadas
             tableLayoutPanel1.Controls.Add(button5, 5, 0);
             tableLayoutPanel1.Controls.Add(button2, 3, 0);
             tableLayoutPanel1.Controls.Add(button3, 4, 0);
-            tableLayoutPanel1.Location = new Point(293, 17);
+            tableLayoutPanel1.Location = new Point(283, 17);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -280,13 +281,14 @@ namespace AgroCoordenadas
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 96);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1254, 67);
+            panel2.Size = new Size(1235, 67);
             panel2.TabIndex = 17;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             BackColor = Color.White;
             ClientSize = new Size(1254, 831);
             Controls.Add(panel3);
@@ -295,6 +297,7 @@ namespace AgroCoordenadas
             Controls.Add(richTextBox2);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AgroCoordenadas";
             Load += Form1_Load;
             panel3.ResumeLayout(false);

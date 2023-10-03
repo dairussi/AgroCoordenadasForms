@@ -17,7 +17,6 @@ namespace AgroCoordenadas
         private string tempFilePath = "";
         public static List<string> texts = new List<string>();
         private readonly IFilter _filter;
-        //private VScrollBar vScrollBar1;
         private string? eResult = null;
         private string? nResult = null;
         private string? latResult = null;
@@ -29,27 +28,13 @@ namespace AgroCoordenadas
         {
             InitializeComponent();
             _filter = new FilterService();
-            richTextBox4.ScrollBars = RichTextBoxScrollBars.None;
-            richTextBox5.ScrollBars = RichTextBoxScrollBars.None;
-            richTextBox6.ScrollBars = RichTextBoxScrollBars.None;
-            richTextBox7.ScrollBars = RichTextBoxScrollBars.None;
-            //panel3.AutoScroll = true;
-            //vScrollBar1 = new VScrollBar();
-            //vScrollBar1.Dock = DockStyle.Right;
-            //vScrollBar1.Scroll += new ScrollEventHandler(vScrollBar1_Scroll);
 
 
-
-            //this.Controls.Add(vScrollBar1);
-
+           
 
 
         }
-        //private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
-        //{
-
-        //    panel3.VerticalScroll.Value = e.NewValue;
-        //}
+       
         private void button1_Click(object sender, EventArgs e)
         {
             texts.Clear();
