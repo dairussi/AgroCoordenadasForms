@@ -56,7 +56,7 @@ namespace AgroCoordenadas
         private void button1_Click(object sender, EventArgs e)
         {
             texts.Clear();
-            eResult = nResult = latResult = longResult = null; 
+            eResult = nResult = latResult = longResult = null;
             results = new FilteredData();
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -344,7 +344,7 @@ namespace AgroCoordenadas
 
 
                     FilteredData filteredData = ApplyFilter(texts);
-                  
+
 
                     richTextBox4.Text = eResult = EFilterResult(filteredData);
                     richTextBox5.Text = nResult = NFilterResult(filteredData);
@@ -476,11 +476,11 @@ namespace AgroCoordenadas
         {
             richTextBox1.Clear();
             richTextBox2.Clear();
-            richTextBox4.Clear();   
-            richTextBox5.Clear();   
+            richTextBox4.Clear();
+            richTextBox5.Clear();
             richTextBox6.Clear();
             richTextBox7.Clear();
-            
+
 
 
         }

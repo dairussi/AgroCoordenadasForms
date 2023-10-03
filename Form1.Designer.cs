@@ -47,9 +47,11 @@ namespace AgroCoordenadas
             panel3 = new Panel();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            panel1 = new Panel();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -59,7 +61,7 @@ namespace AgroCoordenadas
             button1.BackgroundImageLayout = ImageLayout.Stretch;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.Transparent;
-            button1.Location = new Point(605, 99);
+            button1.Location = new Point(605, 165);
             button1.Name = "button1";
             button1.Size = new Size(34, 34);
             button1.TabIndex = 0;
@@ -70,7 +72,7 @@ namespace AgroCoordenadas
             // 
             richTextBox1.BackColor = Color.White;
             richTextBox1.BorderStyle = BorderStyle.FixedSingle;
-            richTextBox1.Location = new Point(316, 95);
+            richTextBox1.Location = new Point(316, 161);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(280, 44);
             richTextBox1.TabIndex = 1;
@@ -87,7 +89,7 @@ namespace AgroCoordenadas
             button2.BackgroundImageLayout = ImageLayout.Stretch;
             button2.FlatStyle = FlatStyle.Flat;
             button2.ForeColor = Color.Transparent;
-            button2.Location = new Point(822, 100);
+            button2.Location = new Point(822, 166);
             button2.Name = "button2";
             button2.Size = new Size(34, 34);
             button2.TabIndex = 3;
@@ -100,7 +102,7 @@ namespace AgroCoordenadas
             button3.BackgroundImageLayout = ImageLayout.Stretch;
             button3.FlatStyle = FlatStyle.Flat;
             button3.ForeColor = Color.Transparent;
-            button3.Location = new Point(861, 100);
+            button3.Location = new Point(861, 166);
             button3.Name = "button3";
             button3.Size = new Size(34, 34);
             button3.TabIndex = 4;
@@ -114,7 +116,7 @@ namespace AgroCoordenadas
             button4.BackgroundImageLayout = ImageLayout.Stretch;
             button4.FlatStyle = FlatStyle.Flat;
             button4.ForeColor = Color.Transparent;
-            button4.Location = new Point(939, 100);
+            button4.Location = new Point(939, 166);
             button4.Name = "button4";
             button4.Size = new Size(34, 34);
             button4.TabIndex = 5;
@@ -128,7 +130,7 @@ namespace AgroCoordenadas
             button5.BackgroundImageLayout = ImageLayout.Stretch;
             button5.FlatStyle = FlatStyle.Flat;
             button5.ForeColor = Color.Transparent;
-            button5.Location = new Point(900, 100);
+            button5.Location = new Point(900, 166);
             button5.Name = "button5";
             button5.Size = new Size(34, 34);
             button5.TabIndex = 6;
@@ -140,7 +142,7 @@ namespace AgroCoordenadas
             button6.BackColor = Color.FromArgb(32, 41, 86);
             button6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             button6.ForeColor = Color.White;
-            button6.Location = new Point(654, 95);
+            button6.Location = new Point(654, 161);
             button6.Name = "button6";
             button6.Size = new Size(140, 44);
             button6.TabIndex = 7;
@@ -150,7 +152,7 @@ namespace AgroCoordenadas
             // 
             // richTextBox2
             // 
-            richTextBox2.Location = new Point(20, 182);
+            richTextBox2.Location = new Point(20, 248);
             richTextBox2.Name = "richTextBox2";
             richTextBox2.RightToLeft = RightToLeft.No;
             richTextBox2.Size = new Size(600, 600);
@@ -202,7 +204,7 @@ namespace AgroCoordenadas
             panel3.Controls.Add(richTextBox6);
             panel3.Controls.Add(richTextBox5);
             panel3.Controls.Add(richTextBox4);
-            panel3.Location = new Point(634, 183);
+            panel3.Location = new Point(634, 249);
             panel3.Name = "panel3";
             panel3.Size = new Size(600, 600);
             panel3.TabIndex = 13;
@@ -217,13 +219,25 @@ namespace AgroCoordenadas
             // 
             // pictureBox2
             // 
+            pictureBox2.Anchor = AnchorStyles.Top;
             pictureBox2.BackgroundImage = Properties.Resources.banner;
             pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox2.Location = new Point(447, 23);
+            pictureBox2.Location = new Point(415, 16);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(314, 51);
+            pictureBox2.Size = new Size(425, 77);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 14;
             pictureBox2.TabStop = false;
+            // 
+            // panel1
+            // 
+            panel1.AutoSize = true;
+            panel1.Controls.Add(pictureBox2);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1254, 96);
+            panel1.TabIndex = 15;
             // 
             // Form1
             // 
@@ -231,7 +245,7 @@ namespace AgroCoordenadas
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1254, 831);
-            Controls.Add(pictureBox2);
+            Controls.Add(panel1);
             Controls.Add(richTextBox2);
             Controls.Add(button6);
             Controls.Add(button5);
@@ -248,7 +262,9 @@ namespace AgroCoordenadas
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -269,5 +285,6 @@ namespace AgroCoordenadas
         private Panel panel3;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private Panel panel1;
     }
 }
