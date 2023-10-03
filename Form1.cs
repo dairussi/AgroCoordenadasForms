@@ -326,7 +326,6 @@ namespace AgroCoordenadas
 
                     FilteredData filteredData = ApplyFilter(texts);
 
-
                     richTextBox4.Text = eResult = EFilterResult(filteredData);
                     richTextBox5.Text = nResult = NFilterResult(filteredData);
                     richTextBox6.Text = latResult = LatitudeFilterResult(filteredData);
@@ -336,6 +335,16 @@ namespace AgroCoordenadas
                     richTextBox5.Height = (int)(CalculateRichTextBoxHeight(richTextBox5) * 1.2);
                     richTextBox6.Height = (int)(CalculateRichTextBoxHeight(richTextBox6) * 1.2);
                     richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
+
+                    bool isPair1Visible = !string.IsNullOrEmpty(richTextBox4.Text) || !string.IsNullOrEmpty(richTextBox5.Text);
+
+                    richTextBox4.Visible = isPair1Visible;
+                    richTextBox5.Visible = isPair1Visible;
+
+                    bool isPair2Visible = !string.IsNullOrEmpty(richTextBox6.Text) || !string.IsNullOrEmpty(richTextBox7.Text);
+
+                    richTextBox6.Visible = isPair2Visible;
+                    richTextBox7.Visible = isPair2Visible;
 
 
                 }
