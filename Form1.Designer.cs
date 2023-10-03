@@ -65,7 +65,7 @@ namespace AgroCoordenadas
             button1.BackgroundImageLayout = ImageLayout.Stretch;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.Transparent;
-            button1.Location = new Point(304, 3);
+            button1.Location = new Point(314, 3);
             button1.Name = "button1";
             button1.Size = new Size(34, 34);
             button1.TabIndex = 0;
@@ -93,7 +93,7 @@ namespace AgroCoordenadas
             button2.BackgroundImageLayout = ImageLayout.Stretch;
             button2.FlatStyle = FlatStyle.Flat;
             button2.ForeColor = Color.Transparent;
-            button2.Location = new Point(498, 3);
+            button2.Location = new Point(510, 3);
             button2.Name = "button2";
             button2.Size = new Size(34, 34);
             button2.TabIndex = 3;
@@ -106,7 +106,7 @@ namespace AgroCoordenadas
             button3.BackgroundImageLayout = ImageLayout.Stretch;
             button3.FlatStyle = FlatStyle.Flat;
             button3.ForeColor = Color.Transparent;
-            button3.Location = new Point(544, 3);
+            button3.Location = new Point(550, 3);
             button3.Name = "button3";
             button3.Size = new Size(34, 34);
             button3.TabIndex = 4;
@@ -134,7 +134,7 @@ namespace AgroCoordenadas
             button5.BackgroundImageLayout = ImageLayout.Stretch;
             button5.FlatStyle = FlatStyle.Flat;
             button5.ForeColor = Color.Transparent;
-            button5.Location = new Point(589, 3);
+            button5.Location = new Point(590, 3);
             button5.Name = "button5";
             button5.Size = new Size(34, 34);
             button5.TabIndex = 6;
@@ -146,7 +146,7 @@ namespace AgroCoordenadas
             button6.BackColor = Color.FromArgb(32, 41, 86);
             button6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             button6.ForeColor = Color.White;
-            button6.Location = new Point(348, 3);
+            button6.Location = new Point(360, 3);
             button6.Name = "button6";
             button6.Size = new Size(140, 41);
             button6.TabIndex = 7;
@@ -172,6 +172,7 @@ namespace AgroCoordenadas
             richTextBox4.Size = new Size(140, 580);
             richTextBox4.TabIndex = 9;
             richTextBox4.Text = "";
+            richTextBox4.ScrollBars = RichTextBoxScrollBars.None;
             // 
             // richTextBox5
             // 
@@ -181,6 +182,7 @@ namespace AgroCoordenadas
             richTextBox5.Size = new Size(140, 580);
             richTextBox5.TabIndex = 10;
             richTextBox5.Text = "";
+            richTextBox5.ScrollBars = RichTextBoxScrollBars.None;
             // 
             // richTextBox6
             // 
@@ -191,6 +193,7 @@ namespace AgroCoordenadas
             richTextBox6.Size = new Size(140, 580);
             richTextBox6.TabIndex = 11;
             richTextBox6.Text = "";
+            richTextBox6.ScrollBars = RichTextBoxScrollBars.None;
             // 
             // richTextBox7
             // 
@@ -200,6 +203,7 @@ namespace AgroCoordenadas
             richTextBox7.Size = new Size(140, 580);
             richTextBox7.TabIndex = 12;
             richTextBox7.Text = "";
+            richTextBox7.ScrollBars = RichTextBoxScrollBars.None;
             // 
             // panel3
             // 
@@ -208,7 +212,7 @@ namespace AgroCoordenadas
             panel3.Controls.Add(richTextBox6);
             panel3.Controls.Add(richTextBox5);
             panel3.Controls.Add(richTextBox4);
-            panel3.Location = new Point(634, 249);
+            panel3.Location = new Point(626, 248);
             panel3.Name = "panel3";
             panel3.Size = new Size(600, 600);
             panel3.TabIndex = 13;
@@ -247,12 +251,12 @@ namespace AgroCoordenadas
             // 
             tableLayoutPanel1.Anchor = AnchorStyles.Top;
             tableLayoutPanel1.ColumnCount = 7;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 87.25212F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.7478752F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 88F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 46F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 45F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 41F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.Controls.Add(richTextBox1, 0, 0);
             tableLayoutPanel1.Controls.Add(button1, 1, 0);
@@ -285,10 +289,10 @@ namespace AgroCoordenadas
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1254, 831);
+            Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(richTextBox2);
-            Controls.Add(panel3);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "AgroCoordenadas";
