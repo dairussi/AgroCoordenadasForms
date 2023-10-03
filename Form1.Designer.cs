@@ -68,7 +68,6 @@ namespace AgroCoordenadas
             // 
             // richTextBox2
             // 
-            richTextBox2.BorderStyle = BorderStyle.None;
             richTextBox2.Location = new Point(11, 11);
             richTextBox2.Name = "richTextBox2";
             richTextBox2.RightToLeft = RightToLeft.No;
@@ -230,6 +229,7 @@ namespace AgroCoordenadas
             // 
             panel3.Anchor = AnchorStyles.Top;
             panel3.AutoScroll = true;
+            panel3.BorderStyle = BorderStyle.Fixed3D;
             panel3.Controls.Add(richTextBox7);
             panel3.Controls.Add(richTextBox6);
             panel3.Controls.Add(richTextBox5);
@@ -261,6 +261,7 @@ namespace AgroCoordenadas
             richTextBox6.TabIndex = 11;
             richTextBox6.Text = "";
             richTextBox6.Visible = false;
+            richTextBox6.SelectionAlignment = HorizontalAlignment.Right;
             // 
             // richTextBox5
             // 
@@ -284,6 +285,7 @@ namespace AgroCoordenadas
             richTextBox4.TabIndex = 9;
             richTextBox4.Text = "";
             richTextBox4.Visible = false;
+            richTextBox4.SelectionAlignment = HorizontalAlignment.Right;
             // 
             // panel2
             // 
@@ -337,7 +339,6 @@ namespace AgroCoordenadas
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AgroCoordenadas";
-            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
