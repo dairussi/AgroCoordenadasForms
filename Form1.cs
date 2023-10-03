@@ -337,14 +337,37 @@ namespace AgroCoordenadas
                     richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
 
                     bool isPair1Visible = !string.IsNullOrEmpty(richTextBox4.Text) || !string.IsNullOrEmpty(richTextBox5.Text);
-
                     richTextBox4.Visible = isPair1Visible;
                     richTextBox5.Visible = isPair1Visible;
 
                     bool isPair2Visible = !string.IsNullOrEmpty(richTextBox6.Text) || !string.IsNullOrEmpty(richTextBox7.Text);
-
                     richTextBox6.Visible = isPair2Visible;
                     richTextBox7.Visible = isPair2Visible;
+                    int availableWidth = panel3.Width;
+
+                    List<RichTextBox> visibleRichTextBoxes = new List<RichTextBox>();
+
+                    if (isPair1Visible)
+                    {
+                        visibleRichTextBoxes.Add(richTextBox4);
+                        visibleRichTextBoxes.Add(richTextBox5);
+                    }
+
+                    if (isPair2Visible)
+                    {
+                        visibleRichTextBoxes.Add(richTextBox6);
+                        visibleRichTextBoxes.Add(richTextBox7);
+                    }
+
+                    int totalRichTextBoxWidth = visibleRichTextBoxes.Count * 160;
+                    int marginX = (availableWidth - totalRichTextBoxWidth) / 2;
+
+                    foreach (RichTextBox richTextBox in visibleRichTextBoxes)
+                    {
+                        richTextBox.Width = 160;
+                        richTextBox.Location = new Point(marginX, richTextBox.Location.Y);
+                        marginX += 160;
+                    }
 
 
                 }

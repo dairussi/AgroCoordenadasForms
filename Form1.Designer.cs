@@ -68,10 +68,11 @@ namespace AgroCoordenadas
             // 
             // richTextBox2
             // 
-            richTextBox2.Location = new Point(3, 3);
+            richTextBox2.BorderStyle = BorderStyle.None;
+            richTextBox2.Location = new Point(11, 11);
             richTextBox2.Name = "richTextBox2";
             richTextBox2.RightToLeft = RightToLeft.No;
-            richTextBox2.Size = new Size(694, 700);
+            richTextBox2.Size = new Size(700, 700);
             richTextBox2.TabIndex = 0;
             richTextBox2.Text = "";
             // 
@@ -88,7 +89,7 @@ namespace AgroCoordenadas
             pictureBox2.Anchor = AnchorStyles.Top;
             pictureBox2.BackgroundImage = Properties.Resources.banner;
             pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox2.Location = new Point(514, 16);
+            pictureBox2.Location = new Point(503, 16);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(425, 77);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -102,7 +103,7 @@ namespace AgroCoordenadas
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1452, 96);
+            panel1.Size = new Size(1431, 96);
             panel1.TabIndex = 15;
             // 
             // tableLayoutPanel1
@@ -123,7 +124,7 @@ namespace AgroCoordenadas
             tableLayoutPanel1.Controls.Add(button5, 5, 0);
             tableLayoutPanel1.Controls.Add(button2, 3, 0);
             tableLayoutPanel1.Controls.Add(button3, 4, 0);
-            tableLayoutPanel1.Location = new Point(325, 17);
+            tableLayoutPanel1.Location = new Point(314, 17);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -135,9 +136,10 @@ namespace AgroCoordenadas
             // 
             richTextBox1.BackColor = Color.White;
             richTextBox1.BorderStyle = BorderStyle.FixedSingle;
+            richTextBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox1.Location = new Point(3, 3);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(280, 41);
+            richTextBox1.Size = new Size(305, 41);
             richTextBox1.TabIndex = 1;
             richTextBox1.Text = "";
             // 
@@ -228,14 +230,13 @@ namespace AgroCoordenadas
             // 
             panel3.Anchor = AnchorStyles.Top;
             panel3.AutoScroll = true;
-            panel3.BorderStyle = BorderStyle.Fixed3D;
             panel3.Controls.Add(richTextBox7);
             panel3.Controls.Add(richTextBox6);
             panel3.Controls.Add(richTextBox5);
             panel3.Controls.Add(richTextBox4);
-            panel3.Location = new Point(706, 3);
+            panel3.Location = new Point(717, 11);
             panel3.Name = "panel3";
-            panel3.Size = new Size(688, 685);
+            panel3.Size = new Size(700, 700);
             panel3.TabIndex = 13;
             // 
             // richTextBox7
@@ -291,7 +292,7 @@ namespace AgroCoordenadas
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 96);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1452, 67);
+            panel2.Size = new Size(1431, 67);
             panel2.TabIndex = 17;
             // 
             // tableLayoutPanel2
@@ -303,12 +304,13 @@ namespace AgroCoordenadas
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Controls.Add(panel3, 1, 0);
             tableLayoutPanel2.Controls.Add(richTextBox2, 0, 0);
-            tableLayoutPanel2.Location = new Point(26, 85);
+            tableLayoutPanel2.Location = new Point(15, 85);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.Padding = new Padding(8);
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(1400, 706);
+            tableLayoutPanel2.Size = new Size(1428, 722);
             tableLayoutPanel2.TabIndex = 18;
             // 
             // panel4
@@ -318,7 +320,7 @@ namespace AgroCoordenadas
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 163);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1452, 794);
+            panel4.Size = new Size(1431, 810);
             panel4.TabIndex = 19;
             // 
             // Form1
@@ -326,7 +328,7 @@ namespace AgroCoordenadas
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            BackColor = Color.Gainsboro;
+            BackColor = Color.White;
             ClientSize = new Size(1452, 965);
             Controls.Add(panel4);
             Controls.Add(panel2);
