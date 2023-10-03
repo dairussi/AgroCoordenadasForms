@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "AgroCoordenadas/1.0.0": {
         "dependencies": {
+          "BouncyCastle": "1.8.9",
           "NPOI": "2.6.2",
           "PdfiumViewer": "2.13.0",
           "PdfiumViewer.Native.x86.v8-xfa": "2018.4.8.256",

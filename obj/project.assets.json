@@ -1236,6 +1236,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0-windows7.0": [
+      "BouncyCastle >= 1.8.9",
       "NPOI >= 2.6.2",
       "PdfiumViewer >= 2.13.0",
       "PdfiumViewer.Native.x86.v8-xfa >= 2018.4.8.256",
@@ -1288,6 +1289,10 @@
       "net7.0-windows7.0": {
         "targetAlias": "net7.0-windows",
         "dependencies": {
+          "BouncyCastle": {
+            "target": "Package",
+            "version": "[1.8.9, )"
+          },
           "NPOI": {
             "target": "Package",
             "version": "[2.6.2, )"
