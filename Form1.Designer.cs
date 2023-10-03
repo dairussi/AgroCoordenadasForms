@@ -52,6 +52,7 @@ namespace AgroCoordenadas
             panel2 = new Panel();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel4 = new Panel();
+            progressBar1 = new ProgressBar();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
@@ -123,7 +124,7 @@ namespace AgroCoordenadas
             tableLayoutPanel1.Controls.Add(button5, 5, 0);
             tableLayoutPanel1.Controls.Add(button2, 3, 0);
             tableLayoutPanel1.Controls.Add(button3, 4, 0);
-            tableLayoutPanel1.Location = new Point(314, 17);
+            tableLayoutPanel1.Location = new Point(381, 17);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -261,7 +262,6 @@ namespace AgroCoordenadas
             richTextBox6.TabIndex = 11;
             richTextBox6.Text = "";
             richTextBox6.Visible = false;
-            richTextBox6.SelectionAlignment = HorizontalAlignment.Right;
             // 
             // richTextBox5
             // 
@@ -285,7 +285,6 @@ namespace AgroCoordenadas
             richTextBox4.TabIndex = 9;
             richTextBox4.Text = "";
             richTextBox4.Visible = false;
-            richTextBox4.SelectionAlignment = HorizontalAlignment.Right;
             // 
             // panel2
             // 
@@ -318,12 +317,24 @@ namespace AgroCoordenadas
             // panel4
             // 
             panel4.AutoSize = true;
+            panel4.Controls.Add(progressBar1);
             panel4.Controls.Add(tableLayoutPanel2);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 163);
             panel4.Name = "panel4";
             panel4.Size = new Size(1431, 810);
             panel4.TabIndex = 19;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Anchor = AnchorStyles.Top;
+            progressBar1.Location = new Point(381, 28);
+            progressBar1.MarqueeAnimationSpeed = 15;
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(668, 19);
+            progressBar1.Style = ProgressBarStyle.Marquee;
+            progressBar1.TabIndex = 19;
+            progressBar1.Visible = false;
             // 
             // Form1
             // 
@@ -374,5 +385,6 @@ namespace AgroCoordenadas
         private Panel panel2;
         private TableLayoutPanel tableLayoutPanel2;
         private Panel panel4;
+        private ProgressBar progressBar1;
     }
 }

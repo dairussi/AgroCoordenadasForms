@@ -22,6 +22,7 @@ namespace AgroCoordenadas
         private string? longResult = null;
         FilteredData results = new FilteredData();
 
+
         public Form1()
         {
             InitializeComponent();
@@ -42,15 +43,15 @@ namespace AgroCoordenadas
             richTextBox7.Clear();
             try
             {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string filePath = openFileDialog1.FileName;
-                string fileName = System.IO.Path.GetFileName(filePath);
-                string nomeDoArquivoNormalizado = fileName.Normalize(NormalizationForm.FormD);
-                tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), nomeDoArquivoNormalizado);
-                File.Copy(filePath, tempFilePath, true);
-                richTextBox1.Text = fileName;
-            }
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = openFileDialog1.FileName;
+                    string fileName = System.IO.Path.GetFileName(filePath);
+                    string nomeDoArquivoNormalizado = fileName.Normalize(NormalizationForm.FormD);
+                    tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), nomeDoArquivoNormalizado);
+                    File.Copy(filePath, tempFilePath, true);
+                    richTextBox1.Text = fileName;
+                }
             }
             catch (Exception ex)
             {
@@ -65,18 +66,18 @@ namespace AgroCoordenadas
             try
             {
                 using (var reader = new PdfReader(tempFilePath))
-            {
-                for (int page = 1; page <= reader.NumberOfPages; page++)
                 {
-                    var strategy = new SimpleTextExtractionStrategy();
-                    var currentText = PdfTextExtractor.GetTextFromPage(reader, page, strategy);
-                    if (!string.IsNullOrWhiteSpace(currentText))
+                    for (int page = 1; page <= reader.NumberOfPages; page++)
                     {
-                        isSelectablePdf = true;
-                        break;
+                        var strategy = new SimpleTextExtractionStrategy();
+                        var currentText = PdfTextExtractor.GetTextFromPage(reader, page, strategy);
+                        if (!string.IsNullOrWhiteSpace(currentText))
+                        {
+                            isSelectablePdf = true;
+                            break;
+                        }
                     }
                 }
-            }
             }
             catch
             {
@@ -87,16 +88,17 @@ namespace AgroCoordenadas
         //método de extração de texto caso o pdf seja selecionável
         private List<string> PdfText(string tempFilePath)
         {
-            try { 
-            using (var reader = new PdfReader(tempFilePath))
+            try
             {
-                for (int page = 1; page <= reader.NumberOfPages; page++)
+                using (var reader = new PdfReader(tempFilePath))
                 {
-                    var strategy = new SimpleTextExtractionStrategy();
-                    var currentText = PdfTextExtractor.GetTextFromPage(reader, page, strategy);
-                    texts.Add(currentText);
+                    for (int page = 1; page <= reader.NumberOfPages; page++)
+                    {
+                        var strategy = new SimpleTextExtractionStrategy();
+                        var currentText = PdfTextExtractor.GetTextFromPage(reader, page, strategy);
+                        texts.Add(currentText);
+                    }
                 }
-            }
             }
             catch (Exception ex)
             {
@@ -108,72 +110,73 @@ namespace AgroCoordenadas
         //método de extração de texto caso o pdf não seja selecionável
         private List<string> PdfImg(string tempFilePath)
         {
-            try { 
-            string outputFolder = "Tempory/";
-            if (Directory.Exists(outputFolder))
+            try
             {
-                Directory.Delete(outputFolder, true);
-            }
-            Directory.CreateDirectory(outputFolder);
-
-            //conversão escala de cinza
-            static Bitmap ConvertToGrayscale(Bitmap original)
-            {
-                Bitmap grayscaleBitmap = new Bitmap(original.Width, original.Height);
-                for (int y = 0; y < original.Height; y++)
+                string outputFolder = "Tempory/";
+                if (Directory.Exists(outputFolder))
                 {
-                    for (int x = 0; x < original.Width; x++)
-                    {
-                        Color originalColor = original.GetPixel(x, y);
-                        int luminance = (int)(originalColor.R * 0.3 + originalColor.G * 0.59 + originalColor.B * 0.11);
-                        Color grayscaleColor = Color.FromArgb(luminance, luminance, luminance);
-                        grayscaleBitmap.SetPixel(x, y, grayscaleColor);
-                    }
+                    Directory.Delete(outputFolder, true);
                 }
-                return grayscaleBitmap;
-            }
+                Directory.CreateDirectory(outputFolder);
 
-            //salva cada página como imagem
-            using (PdfiumViewer.PdfDocument pdfDocument = PdfiumViewer.PdfDocument.Load(tempFilePath))
-            {
-                for (int pageNumber = 0; pageNumber < pdfDocument.PageCount; pageNumber++)
+                //conversão escala de cinza
+                static Bitmap ConvertToGrayscale(Bitmap original)
                 {
-                    using (Image image = pdfDocument.Render(pageNumber, 2200, 2200, 200, 200, PdfRenderFlags.Annotations))
+                    Bitmap grayscaleBitmap = new Bitmap(original.Width, original.Height);
+                    for (int y = 0; y < original.Height; y++)
                     {
-                        using (Bitmap bitmap = new Bitmap(image))
+                        for (int x = 0; x < original.Width; x++)
                         {
-                            using (Bitmap grayscaleBitmap = ConvertToGrayscale(bitmap))
+                            Color originalColor = original.GetPixel(x, y);
+                            int luminance = (int)(originalColor.R * 0.3 + originalColor.G * 0.59 + originalColor.B * 0.11);
+                            Color grayscaleColor = Color.FromArgb(luminance, luminance, luminance);
+                            grayscaleBitmap.SetPixel(x, y, grayscaleColor);
+                        }
+                    }
+                    return grayscaleBitmap;
+                }
+
+                //salva cada página como imagem
+                using (PdfiumViewer.PdfDocument pdfDocument = PdfiumViewer.PdfDocument.Load(tempFilePath))
+                {
+                    for (int pageNumber = 0; pageNumber < pdfDocument.PageCount; pageNumber++)
+                    {
+                        using (Image image = pdfDocument.Render(pageNumber, 2200, 2200, 200, 200, PdfRenderFlags.Annotations))
+                        {
+                            using (Bitmap bitmap = new Bitmap(image))
                             {
-                                string outputFile = System.IO.Path.Combine(outputFolder, $"ToImage-{pageNumber + 1}.png");
-                                grayscaleBitmap.Save(outputFile, System.Drawing.Imaging.ImageFormat.Png);
+                                using (Bitmap grayscaleBitmap = ConvertToGrayscale(bitmap))
+                                {
+                                    string outputFile = System.IO.Path.Combine(outputFolder, $"ToImage-{pageNumber + 1}.png");
+                                    grayscaleBitmap.Save(outputFile, System.Drawing.Imaging.ImageFormat.Png);
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            //tesseract para extração do texto de imagens
-            Environment.SetEnvironmentVariable("TESSDATA_PREFIX", "./tessdata");
-            using (TesseractEngine engine = new TesseractEngine("./tessdata", "eng", EngineMode.Default))
-            {
-                string[] imageFiles = Directory.GetFiles(outputFolder, "*.png");
-                foreach (var imageFile in imageFiles)
+                //tesseract para extração do texto de imagens
+                Environment.SetEnvironmentVariable("TESSDATA_PREFIX", "./tessdata");
+                using (TesseractEngine engine = new TesseractEngine("./tessdata", "eng", EngineMode.Default))
                 {
-                    using (var img = Pix.LoadFromFile(imageFile))
+                    string[] imageFiles = Directory.GetFiles(outputFolder, "*.png");
+                    foreach (var imageFile in imageFiles)
                     {
-                        using (var page = engine.Process(img))
+                        using (var img = Pix.LoadFromFile(imageFile))
                         {
-                            string text = page.GetText();
-                            text = text.Replace("\n", " ");
-                            text = text.Replace("\r", " ");
-                            text = text.Replace("\t", " ");
-                            text = text.Replace("º", "°");
-                            texts.Add(text);
+                            using (var page = engine.Process(img))
+                            {
+                                string text = page.GetText();
+                                text = text.Replace("\n", " ");
+                                text = text.Replace("\r", " ");
+                                text = text.Replace("\t", " ");
+                                text = text.Replace("º", "°");
+                                texts.Add(text);
+                            }
                         }
                     }
                 }
-            }
-            Directory.Delete(outputFolder, true);
+                Directory.Delete(outputFolder, true);
             }
             catch (Exception ex)
             {
@@ -185,31 +188,32 @@ namespace AgroCoordenadas
         //aplicação da service filter
         private FilteredData ApplyFilter(List<string> texts)
         {
-            try { 
-            foreach (var text in texts)
+            try
             {
-                var coordinates = _filter.Filter(text);
-                if (coordinates.N != null)
+                foreach (var text in texts)
                 {
-                    results.N ??= new List<string>();
-                    results.N.AddRange(coordinates.N);
+                    var coordinates = _filter.Filter(text);
+                    if (coordinates.N != null)
+                    {
+                        results.N ??= new List<string>();
+                        results.N.AddRange(coordinates.N);
+                    }
+                    if (coordinates.E != null)
+                    {
+                        results.E ??= new List<string>();
+                        results.E.AddRange(coordinates.E);
+                    }
+                    if (coordinates.Latitude != null)
+                    {
+                        results.Latitude ??= new List<string>();
+                        results.Latitude.AddRange(coordinates.Latitude);
+                    }
+                    if (coordinates.Longitude != null)
+                    {
+                        results.Longitude ??= new List<string>();
+                        results.Longitude.AddRange(coordinates.Longitude);
+                    }
                 }
-                if (coordinates.E != null)
-                {
-                    results.E ??= new List<string>();
-                    results.E.AddRange(coordinates.E);
-                }
-                if (coordinates.Latitude != null)
-                {
-                    results.Latitude ??= new List<string>();
-                    results.Latitude.AddRange(coordinates.Latitude);
-                }
-                if (coordinates.Longitude != null)
-                {
-                    results.Longitude ??= new List<string>();
-                    results.Longitude.AddRange(coordinates.Longitude);
-                }
-            }
             }
             catch (Exception ex)
             {
@@ -318,77 +322,89 @@ namespace AgroCoordenadas
         }
 
         //botão chamada dos métodos de extração e filtros 
-        private void button6_MouseDown(object? sender, EventArgs e)
+        private async void button6_MouseDown(object? sender, EventArgs e)
         {
             button6.MouseDown -= button6_MouseDown;
+            progressBar1.Visible = true;
             if (string.IsNullOrEmpty(tempFilePath))
             {
                 MessageBox.Show("Selecione um arquivo PDF antes de continuar.");
                 button6.MouseDown += button6_MouseDown;
+                progressBar1.Visible = false;
             }
             else
             {
                 try
                 {
-                bool isSelectablePdf = IsSelectablePdf(tempFilePath);
-                if (isSelectablePdf)
-                {
-                    List<string> textFromPdfText = PdfText(tempFilePath);
-                    List<string> textFromPdfImg = PdfImg(tempFilePath);
-                    if (textFromPdfText.Count > textFromPdfImg.Count)
+                    await Task.Run(() =>
                     {
-                        texts = textFromPdfText;
-                    }
-                    else
-                    {
-                        texts = textFromPdfImg;
-                    }
-                }
-                else
-                {
-                    List<string> textFromPdfImg = PdfImg(tempFilePath);
-                    texts = textFromPdfImg;
-                }
-                richTextBox2.Text = string.Join(Environment.NewLine, texts);
+                        bool isSelectablePdf = IsSelectablePdf(tempFilePath);
+                        if (isSelectablePdf)
+                        {
+                            List<string> textFromPdfText = PdfText(tempFilePath);
+                            List<string> textFromPdfImg = PdfImg(tempFilePath);
+                            if (textFromPdfText.Count > textFromPdfImg.Count)
+                            {
+                                texts = textFromPdfText;
+                            }
+                            else
+                            {
+                                texts = textFromPdfImg;
+                            }
+                        }
+                        else
+                        {
+                            List<string> textFromPdfImg = PdfImg(tempFilePath);
+                            texts = textFromPdfImg;
+                        }
+                        this.Invoke((MethodInvoker)delegate {
+                            richTextBox2.Text = string.Join(Environment.NewLine, texts);
+                        
 
-                FilteredData filteredData = ApplyFilter(texts);
+                        FilteredData filteredData = ApplyFilter(texts);
 
-                richTextBox4.Text = eResult = EFilterResult(filteredData);
-                richTextBox5.Text = nResult = NFilterResult(filteredData);
-                richTextBox6.Text = latResult = LatitudeFilterResult(filteredData);
-                richTextBox7.Text = longResult = LongitudeFilterResult(filteredData);
+                            richTextBox4.SelectionAlignment = HorizontalAlignment.Right;
+                            richTextBox6.SelectionAlignment = HorizontalAlignment.Right;
+                            richTextBox4.Text = eResult = EFilterResult(filteredData);
+                            richTextBox5.Text = nResult = NFilterResult(filteredData);
+                            richTextBox6.Text = latResult = LatitudeFilterResult(filteredData);
+                            richTextBox7.Text = longResult = LongitudeFilterResult(filteredData);
 
-                richTextBox4.Height = (int)(CalculateRichTextBoxHeight(richTextBox4) * 1.2);
-                richTextBox5.Height = (int)(CalculateRichTextBoxHeight(richTextBox5) * 1.2);
-                richTextBox6.Height = (int)(CalculateRichTextBoxHeight(richTextBox6) * 1.2);
-                richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
+                            richTextBox4.Height = (int)(CalculateRichTextBoxHeight(richTextBox4) * 1.2);
+                            richTextBox5.Height = (int)(CalculateRichTextBoxHeight(richTextBox5) * 1.2);
+                            richTextBox6.Height = (int)(CalculateRichTextBoxHeight(richTextBox6) * 1.2);
+                            richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
 
-                bool isPair1Visible = !string.IsNullOrEmpty(richTextBox4.Text) || !string.IsNullOrEmpty(richTextBox5.Text);
-                richTextBox4.Visible = isPair1Visible;
-                richTextBox5.Visible = isPair1Visible;
-                bool isPair2Visible = !string.IsNullOrEmpty(richTextBox6.Text) || !string.IsNullOrEmpty(richTextBox7.Text);
-                richTextBox6.Visible = isPair2Visible;
-                richTextBox7.Visible = isPair2Visible;
-                int availableWidth = panel3.Width;
-                List<RichTextBox> visibleRichTextBoxes = new List<RichTextBox>();
-                if (isPair1Visible)
-                {
-                    visibleRichTextBoxes.Add(richTextBox4);
-                    visibleRichTextBoxes.Add(richTextBox5);
-                }
-                if (isPair2Visible)
-                {
-                    visibleRichTextBoxes.Add(richTextBox6);
-                    visibleRichTextBoxes.Add(richTextBox7);
-                }
-                int totalRichTextBoxWidth = visibleRichTextBoxes.Count * 160;
-                int marginX = (availableWidth - totalRichTextBoxWidth) / 2;
-                foreach (RichTextBox richTextBox in visibleRichTextBoxes)
-                {
-                    richTextBox.Width = 160;
-                    richTextBox.Location = new Point(marginX, richTextBox.Location.Y);
-                    marginX += 160;
-                } 
+                            bool isPair1Visible = !string.IsNullOrEmpty(richTextBox4.Text) || !string.IsNullOrEmpty(richTextBox5.Text);
+                            richTextBox4.Visible = isPair1Visible;
+                            richTextBox5.Visible = isPair1Visible;
+                            bool isPair2Visible = !string.IsNullOrEmpty(richTextBox6.Text) || !string.IsNullOrEmpty(richTextBox7.Text);
+                            richTextBox6.Visible = isPair2Visible;
+                            richTextBox7.Visible = isPair2Visible;
+                            int availableWidth = panel3.Width;
+                            List<RichTextBox> visibleRichTextBoxes = new List<RichTextBox>();
+                            if (isPair1Visible)
+                            {
+                                visibleRichTextBoxes.Add(richTextBox4);
+                                visibleRichTextBoxes.Add(richTextBox5);
+                            }
+                            if (isPair2Visible)
+                            {
+                                visibleRichTextBoxes.Add(richTextBox6);
+                                visibleRichTextBoxes.Add(richTextBox7);
+                            }
+                            int totalRichTextBoxWidth = visibleRichTextBoxes.Count * 160;
+                            int marginX = (availableWidth - totalRichTextBoxWidth) / 2;
+                            foreach (RichTextBox richTextBox in visibleRichTextBoxes)
+                            {
+                                richTextBox.Width = 160;
+                                richTextBox.Location = new Point(marginX, richTextBox.Location.Y);
+                                marginX += 160;
+                            }
+                            progressBar1.MarqueeAnimationSpeed = 0;
+                            progressBar1.Visible = false;
+                    });
+                    });
                 }
                 finally
                 {
