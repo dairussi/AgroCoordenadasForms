@@ -30,11 +30,11 @@ namespace AgroCoordenadas
             _filter = new FilterService();
 
 
-           
+
 
 
         }
-       
+
         private void button1_Click(object sender, EventArgs e)
         {
             texts.Clear();
@@ -52,6 +52,7 @@ namespace AgroCoordenadas
             }
 
         }
+        //coments
         private bool IsSelectablePdf(string tempFilePath)
         {
             bool isSelectablePdf = false;

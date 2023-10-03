@@ -31,32 +31,172 @@ namespace AgroCoordenadas
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            button1 = new Button();
-            richTextBox1 = new RichTextBox();
             openFileDialog1 = new OpenFileDialog();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
             richTextBox2 = new RichTextBox();
-            richTextBox4 = new RichTextBox();
-            richTextBox5 = new RichTextBox();
-            richTextBox6 = new RichTextBox();
-            richTextBox7 = new RichTextBox();
-            panel3 = new Panel();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
             panel1 = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
+            button3 = new Button();
+            button2 = new Button();
+            button5 = new Button();
+            button4 = new Button();
+            button6 = new Button();
+            button1 = new Button();
+            richTextBox1 = new RichTextBox();
+            panel3 = new Panel();
+            richTextBox4 = new RichTextBox();
+            richTextBox5 = new RichTextBox();
+            richTextBox6 = new RichTextBox();
+            richTextBox7 = new RichTextBox();
             panel2 = new Panel();
-            panel3.SuspendLayout();
+            tableLayoutPanel2 = new TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
+            panel3.SuspendLayout();
             panel2.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // richTextBox2
+            // 
+            richTextBox2.Dock = DockStyle.Fill;
+            richTextBox2.Location = new Point(3, 3);
+            richTextBox2.Name = "richTextBox2";
+            richTextBox2.RightToLeft = RightToLeft.No;
+            richTextBox2.Size = new Size(621, 604);
+            richTextBox2.TabIndex = 0;
+            richTextBox2.Text = "";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(100, 50);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Anchor = AnchorStyles.Top;
+            pictureBox2.BackgroundImage = Properties.Resources.banner;
+            pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox2.Location = new Point(384, 16);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(425, 77);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 14;
+            pictureBox2.TabStop = false;
+            // 
+            // panel1
+            // 
+            panel1.AutoSize = true;
+            panel1.Controls.Add(pictureBox2);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1254, 96);
+            panel1.TabIndex = 15;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top;
+            tableLayoutPanel1.ColumnCount = 7;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 88F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.Controls.Add(richTextBox1, 0, 0);
+            tableLayoutPanel1.Controls.Add(button1, 1, 0);
+            tableLayoutPanel1.Controls.Add(button6, 2, 0);
+            tableLayoutPanel1.Controls.Add(button4, 6, 0);
+            tableLayoutPanel1.Controls.Add(button5, 5, 0);
+            tableLayoutPanel1.Controls.Add(button2, 3, 0);
+            tableLayoutPanel1.Controls.Add(button3, 4, 0);
+            tableLayoutPanel1.Location = new Point(262, 17);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(668, 47);
+            tableLayoutPanel1.TabIndex = 16;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.White;
+            button3.BackgroundImage = Properties.Resources.lixeira;
+            button3.BackgroundImageLayout = ImageLayout.Stretch;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.ForeColor = Color.Transparent;
+            button3.Location = new Point(550, 3);
+            button3.Name = "button3";
+            button3.Size = new Size(34, 34);
+            button3.TabIndex = 4;
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.White;
+            button2.BackgroundImage = Properties.Resources.destaque;
+            button2.BackgroundImageLayout = ImageLayout.Stretch;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.ForeColor = Color.Transparent;
+            button2.Location = new Point(510, 3);
+            button2.Name = "button2";
+            button2.Size = new Size(34, 34);
+            button2.TabIndex = 3;
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.White;
+            button5.BackgroundImage = Properties.Resources.copy;
+            button5.BackgroundImageLayout = ImageLayout.Stretch;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.ForeColor = Color.Transparent;
+            button5.Location = new Point(590, 3);
+            button5.Name = "button5";
+            button5.Size = new Size(34, 34);
+            button5.TabIndex = 6;
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.White;
+            button4.BackgroundImage = Properties.Resources.xls;
+            button4.BackgroundImageLayout = ImageLayout.Stretch;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.ForeColor = Color.Transparent;
+            button4.Location = new Point(630, 3);
+            button4.Name = "button4";
+            button4.Size = new Size(34, 34);
+            button4.TabIndex = 5;
+            button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
+            // 
+            // button6
+            // 
+            button6.BackColor = Color.FromArgb(32, 41, 86);
+            button6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button6.ForeColor = Color.White;
+            button6.Location = new Point(360, 3);
+            button6.Name = "button6";
+            button6.Size = new Size(140, 41);
+            button6.TabIndex = 7;
+            button6.Text = "Filtrar";
+            button6.UseVisualStyleBackColor = false;
+            button6.MouseDown += button6_MouseDown;
             // 
             // button1
             // 
@@ -82,86 +222,19 @@ namespace AgroCoordenadas
             richTextBox1.TabIndex = 1;
             richTextBox1.Text = "";
             // 
-            // openFileDialog1
+            // panel3
             // 
-            openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // button2
-            // 
-            button2.BackColor = Color.White;
-            button2.BackgroundImage = Properties.Resources.destaque;
-            button2.BackgroundImageLayout = ImageLayout.Stretch;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.ForeColor = Color.Transparent;
-            button2.Location = new Point(510, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(34, 34);
-            button2.TabIndex = 3;
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            button3.BackColor = Color.White;
-            button3.BackgroundImage = Properties.Resources.lixeira;
-            button3.BackgroundImageLayout = ImageLayout.Stretch;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.ForeColor = Color.Transparent;
-            button3.Location = new Point(550, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(34, 34);
-            button3.TabIndex = 4;
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
-            // 
-            // button4
-            // 
-            button4.BackColor = Color.White;
-            button4.BackgroundImage = Properties.Resources.xls;
-            button4.BackgroundImageLayout = ImageLayout.Stretch;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.ForeColor = Color.Transparent;
-            button4.Location = new Point(630, 3);
-            button4.Name = "button4";
-            button4.Size = new Size(34, 34);
-            button4.TabIndex = 5;
-            button4.UseVisualStyleBackColor = false;
-            button4.Click += button4_Click;
-            // 
-            // button5
-            // 
-            button5.BackColor = Color.White;
-            button5.BackgroundImage = Properties.Resources.copy;
-            button5.BackgroundImageLayout = ImageLayout.Stretch;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.ForeColor = Color.Transparent;
-            button5.Location = new Point(590, 3);
-            button5.Name = "button5";
-            button5.Size = new Size(34, 34);
-            button5.TabIndex = 6;
-            button5.UseVisualStyleBackColor = false;
-            button5.Click += button5_Click;
-            // 
-            // button6
-            // 
-            button6.BackColor = Color.FromArgb(32, 41, 86);
-            button6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button6.ForeColor = Color.White;
-            button6.Location = new Point(360, 3);
-            button6.Name = "button6";
-            button6.Size = new Size(140, 41);
-            button6.TabIndex = 7;
-            button6.Text = "Filtrar";
-            button6.UseVisualStyleBackColor = false;
-            button6.MouseDown += button6_MouseDown;
-            // 
-            // richTextBox2
-            // 
-            richTextBox2.Location = new Point(20, 248);
-            richTextBox2.Name = "richTextBox2";
-            richTextBox2.RightToLeft = RightToLeft.No;
-            richTextBox2.Size = new Size(600, 600);
-            richTextBox2.TabIndex = 0;
-            richTextBox2.Text = "";
+            panel3.AutoScroll = true;
+            panel3.BorderStyle = BorderStyle.Fixed3D;
+            panel3.Controls.Add(richTextBox7);
+            panel3.Controls.Add(richTextBox6);
+            panel3.Controls.Add(richTextBox5);
+            panel3.Controls.Add(richTextBox4);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(630, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(621, 604);
+            panel3.TabIndex = 13;
             // 
             // richTextBox4
             // 
@@ -205,75 +278,6 @@ namespace AgroCoordenadas
             richTextBox7.TabIndex = 12;
             richTextBox7.Text = "";
             // 
-            // panel3
-            // 
-            panel3.AutoScroll = true;
-            panel3.BorderStyle = BorderStyle.Fixed3D;
-            panel3.Controls.Add(richTextBox7);
-            panel3.Controls.Add(richTextBox6);
-            panel3.Controls.Add(richTextBox5);
-            panel3.Controls.Add(richTextBox4);
-            panel3.Location = new Point(635, 248);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(600, 600);
-            panel3.TabIndex = 13;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(100, 50);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Anchor = AnchorStyles.Top;
-            pictureBox2.BackgroundImage = Properties.Resources.banner;
-            pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox2.Location = new Point(405, 16);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(425, 77);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 14;
-            pictureBox2.TabStop = false;
-            // 
-            // panel1
-            // 
-            panel1.AutoSize = true;
-            panel1.Controls.Add(pictureBox2);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1235, 96);
-            panel1.TabIndex = 15;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top;
-            tableLayoutPanel1.ColumnCount = 7;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 88F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.Controls.Add(richTextBox1, 0, 0);
-            tableLayoutPanel1.Controls.Add(button1, 1, 0);
-            tableLayoutPanel1.Controls.Add(button6, 2, 0);
-            tableLayoutPanel1.Controls.Add(button4, 6, 0);
-            tableLayoutPanel1.Controls.Add(button5, 5, 0);
-            tableLayoutPanel1.Controls.Add(button2, 3, 0);
-            tableLayoutPanel1.Controls.Add(button3, 4, 0);
-            tableLayoutPanel1.Location = new Point(283, 17);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(668, 47);
-            tableLayoutPanel1.TabIndex = 16;
-            // 
             // panel2
             // 
             panel2.AutoSize = true;
@@ -281,8 +285,24 @@ namespace AgroCoordenadas
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 96);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1235, 67);
+            panel2.Size = new Size(1254, 67);
             panel2.TabIndex = 17;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Controls.Add(panel3, 1, 0);
+            tableLayoutPanel2.Controls.Add(richTextBox2, 0, 0);
+            tableLayoutPanel2.Dock = DockStyle.Top;
+            tableLayoutPanel2.Location = new Point(0, 163);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(1254, 610);
+            tableLayoutPanel2.TabIndex = 18;
             // 
             // Form1
             // 
@@ -291,45 +311,45 @@ namespace AgroCoordenadas
             AutoScroll = true;
             BackColor = Color.White;
             ClientSize = new Size(1254, 831);
-            Controls.Add(panel3);
+            Controls.Add(tableLayoutPanel2);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Controls.Add(richTextBox2);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AgroCoordenadas";
             Load += Form1_Load;
-            panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button button1;
-        private RichTextBox richTextBox1;
         private OpenFileDialog openFileDialog1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
         private RichTextBox richTextBox2;
-        private RichTextBox richTextBox4;
-        private RichTextBox richTextBox5;
-        private RichTextBox richTextBox6;
-        private RichTextBox richTextBox7;
-        private Panel panel3;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private Panel panel1;
         private TableLayoutPanel tableLayoutPanel1;
+        private RichTextBox richTextBox1;
+        private Button button1;
+        private Button button6;
+        private Button button4;
+        private Button button5;
+        private Button button2;
+        private Button button3;
+        private Panel panel3;
+        private RichTextBox richTextBox7;
+        private RichTextBox richTextBox6;
+        private RichTextBox richTextBox5;
+        private RichTextBox richTextBox4;
         private Panel panel2;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }
