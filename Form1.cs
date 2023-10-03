@@ -48,7 +48,7 @@ namespace AgroCoordenadas
             }
 
         }
- 
+
         private bool IsSelectablePdf(string tempFilePath)
         {
             bool isSelectablePdf = false;
@@ -197,6 +197,8 @@ namespace AgroCoordenadas
             return results;
         }
 
+
+
         private int CalculateRichTextBoxHeight(RichTextBox richTextBox)
         {
             using (Graphics g = richTextBox.CreateGraphics())
@@ -216,7 +218,7 @@ namespace AgroCoordenadas
                 resultString.AppendLine("E;");
                 foreach (string e in eArray)
                 {
-                    string formattedE = e;
+                    string formattedE = FormatValueUtm(e);
                     resultString.AppendLine(formattedE + ";");
                 }
             }
@@ -234,7 +236,7 @@ namespace AgroCoordenadas
                 resultString.AppendLine("N");
                 foreach (string n in nArray)
                 {
-                    string formattedN = n;
+                    string formattedN = FormatValueUtm(n);
                     resultString.AppendLine(formattedN);
                 }
 
@@ -253,7 +255,7 @@ namespace AgroCoordenadas
                 resultString.AppendLine("Latitude;");
                 foreach (string lat in latArray)
                 {
-                    string formattedLat = lat;
+                    string formattedLat = FormatValueLatLong(lat);
                     resultString.AppendLine(formattedLat + ";");
                 }
             }
@@ -273,7 +275,7 @@ namespace AgroCoordenadas
                 resultString.AppendLine("Longitude");
                 foreach (string longi in longArray)
                 {
-                    string formattedLong = longi;
+                    string formattedLong = FormatValueLatLong(longi);
                     resultString.AppendLine(formattedLong);
                 }
 
@@ -345,6 +347,31 @@ namespace AgroCoordenadas
             }
         }
 
+        private string FormatValueUtm(string value)
+        {
+            string formattedValue = value.Replace(" ", "");
+            if (formattedValue.Length > 4)
+            {
+                string lastFour = formattedValue.Substring(formattedValue.Length - 4);
+                string everythingElse = formattedValue.Substring(0, formattedValue.Length - 4);
+                lastFour = Regex.Replace(lastFour, @"[.,]", ",");
+                everythingElse = Regex.Replace(everythingElse, @"[^\d]", "");
+                formattedValue = everythingElse + lastFour;
+            }
+            else
+            {
+                formattedValue = formattedValue.TrimEnd('.', ',');
+            }
+            return formattedValue;
+        }
+
+        private string FormatValueLatLong(string value)
+        {
+
+            string formattedValue = value.Replace(" ", "");
+            formattedValue = formattedValue.Replace(".", ",");
+            return formattedValue;
+        }
 
 
         private string CombineContent()
@@ -460,8 +487,37 @@ namespace AgroCoordenadas
             richTextBox6.Clear();
             richTextBox7.Clear();
 
+        }
 
+        private void HighlightMatches(RichTextBox richTextBox, List<string>? matches, Color color)
+        {
+            if (matches != null)
+            {
+                string text = richTextBox.Text;
+                foreach (var match in matches)
+                {
+                    int startIndex = text.IndexOf(match);
+                    while (startIndex >= 0)
+                    {
+                        richTextBox.SelectionStart = startIndex;
+                        richTextBox.SelectionLength = match.Length;
+                        richTextBox.SelectionBackColor = color;
+                        startIndex = text.IndexOf(match, startIndex + 1);
+                    }
+                }
+            }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (var text in texts)
+            {
+                var coordinates = _filter.Filter(text);
 
+                HighlightMatches(richTextBox2, coordinates.N, Color.Orange);
+                HighlightMatches(richTextBox2, coordinates.E, Color.Green);
+                HighlightMatches(richTextBox2, coordinates.Latitude, Color.Yellow);
+                HighlightMatches(richTextBox2, coordinates.Longitude, Color.Purple);
+            }
         }
     }
 }
