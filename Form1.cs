@@ -100,9 +100,8 @@ namespace AgroCoordenadas
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Erro extração do PDF selecionável: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return texts;
         }
@@ -178,9 +177,8 @@ namespace AgroCoordenadas
                 }
                 Directory.Delete(outputFolder, true);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Erro extração do PDF não selecionável: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return texts;
         }
@@ -215,9 +213,8 @@ namespace AgroCoordenadas
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Erro ao aplicar o filtro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return results;
         }
@@ -325,86 +322,81 @@ namespace AgroCoordenadas
         private async void button6_MouseDown(object? sender, EventArgs e)
         {
             button6.MouseDown -= button6_MouseDown;
-            progressBar1.Visible = true;
+
             if (string.IsNullOrEmpty(tempFilePath))
             {
-                MessageBox.Show("Selecione um arquivo PDF antes de continuar.");
+                MessageBox.Show("Selecione um arquivo PDF antes de continuar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 button6.MouseDown += button6_MouseDown;
-                progressBar1.Visible = false;
+
             }
             else
             {
                 try
                 {
-                    await Task.Run(() =>
+                    bool isSelectablePdf = IsSelectablePdf(tempFilePath);
+                    if (isSelectablePdf)
                     {
-                        bool isSelectablePdf = IsSelectablePdf(tempFilePath);
-                        if (isSelectablePdf)
+                        List<string> textFromPdfText = PdfText(tempFilePath);
+                        List<string> textFromPdfImg = PdfImg(tempFilePath);
+                        if (textFromPdfText.Count > textFromPdfImg.Count)
                         {
-                            List<string> textFromPdfText = PdfText(tempFilePath);
-                            List<string> textFromPdfImg = PdfImg(tempFilePath);
-                            if (textFromPdfText.Count > textFromPdfImg.Count)
-                            {
-                                texts = textFromPdfText;
-                            }
-                            else
-                            {
-                                texts = textFromPdfImg;
-                            }
+                            texts = textFromPdfText;
                         }
                         else
                         {
-                            List<string> textFromPdfImg = PdfImg(tempFilePath);
                             texts = textFromPdfImg;
                         }
-                        this.Invoke((MethodInvoker)delegate {
-                            richTextBox2.Text = string.Join(Environment.NewLine, texts);
-                        
+                    }
+                    else
+                    {
+                        List<string> textFromPdfImg = PdfImg(tempFilePath);
+                        texts = textFromPdfImg;
+                    }
 
-                        FilteredData filteredData = ApplyFilter(texts);
+                    richTextBox2.Text = string.Join(Environment.NewLine, texts);
 
-                            richTextBox4.SelectionAlignment = HorizontalAlignment.Right;
-                            richTextBox6.SelectionAlignment = HorizontalAlignment.Right;
-                            richTextBox4.Text = eResult = EFilterResult(filteredData);
-                            richTextBox5.Text = nResult = NFilterResult(filteredData);
-                            richTextBox6.Text = latResult = LatitudeFilterResult(filteredData);
-                            richTextBox7.Text = longResult = LongitudeFilterResult(filteredData);
 
-                            richTextBox4.Height = (int)(CalculateRichTextBoxHeight(richTextBox4) * 1.2);
-                            richTextBox5.Height = (int)(CalculateRichTextBoxHeight(richTextBox5) * 1.2);
-                            richTextBox6.Height = (int)(CalculateRichTextBoxHeight(richTextBox6) * 1.2);
-                            richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
+                    FilteredData filteredData = ApplyFilter(texts);
 
-                            bool isPair1Visible = !string.IsNullOrEmpty(richTextBox4.Text) || !string.IsNullOrEmpty(richTextBox5.Text);
-                            richTextBox4.Visible = isPair1Visible;
-                            richTextBox5.Visible = isPair1Visible;
-                            bool isPair2Visible = !string.IsNullOrEmpty(richTextBox6.Text) || !string.IsNullOrEmpty(richTextBox7.Text);
-                            richTextBox6.Visible = isPair2Visible;
-                            richTextBox7.Visible = isPair2Visible;
-                            int availableWidth = panel3.Width;
-                            List<RichTextBox> visibleRichTextBoxes = new List<RichTextBox>();
-                            if (isPair1Visible)
-                            {
-                                visibleRichTextBoxes.Add(richTextBox4);
-                                visibleRichTextBoxes.Add(richTextBox5);
-                            }
-                            if (isPair2Visible)
-                            {
-                                visibleRichTextBoxes.Add(richTextBox6);
-                                visibleRichTextBoxes.Add(richTextBox7);
-                            }
-                            int totalRichTextBoxWidth = visibleRichTextBoxes.Count * 160;
-                            int marginX = (availableWidth - totalRichTextBoxWidth) / 2;
-                            foreach (RichTextBox richTextBox in visibleRichTextBoxes)
-                            {
-                                richTextBox.Width = 160;
-                                richTextBox.Location = new Point(marginX, richTextBox.Location.Y);
-                                marginX += 160;
-                            }
-                            progressBar1.MarqueeAnimationSpeed = 0;
-                            progressBar1.Visible = false;
-                    });
-                    });
+                    richTextBox4.SelectionAlignment = HorizontalAlignment.Right;
+                    richTextBox6.SelectionAlignment = HorizontalAlignment.Right;
+                    richTextBox4.Text = eResult = EFilterResult(filteredData);
+                    richTextBox5.Text = nResult = NFilterResult(filteredData);
+                    richTextBox6.Text = latResult = LatitudeFilterResult(filteredData);
+                    richTextBox7.Text = longResult = LongitudeFilterResult(filteredData);
+
+                    richTextBox4.Height = (int)(CalculateRichTextBoxHeight(richTextBox4) * 1.2);
+                    richTextBox5.Height = (int)(CalculateRichTextBoxHeight(richTextBox5) * 1.2);
+                    richTextBox6.Height = (int)(CalculateRichTextBoxHeight(richTextBox6) * 1.2);
+                    richTextBox7.Height = (int)(CalculateRichTextBoxHeight(richTextBox7) * 1.2);
+
+                    bool isPair1Visible = !string.IsNullOrEmpty(richTextBox4.Text) || !string.IsNullOrEmpty(richTextBox5.Text);
+                    richTextBox4.Visible = isPair1Visible;
+                    richTextBox5.Visible = isPair1Visible;
+                    bool isPair2Visible = !string.IsNullOrEmpty(richTextBox6.Text) || !string.IsNullOrEmpty(richTextBox7.Text);
+                    richTextBox6.Visible = isPair2Visible;
+                    richTextBox7.Visible = isPair2Visible;
+                    int availableWidth = panel3.Width;
+                    List<RichTextBox> visibleRichTextBoxes = new List<RichTextBox>();
+                    if (isPair1Visible)
+                    {
+                        visibleRichTextBoxes.Add(richTextBox4);
+                        visibleRichTextBoxes.Add(richTextBox5);
+                    }
+                    if (isPair2Visible)
+                    {
+                        visibleRichTextBoxes.Add(richTextBox6);
+                        visibleRichTextBoxes.Add(richTextBox7);
+                    }
+                    int totalRichTextBoxWidth = visibleRichTextBoxes.Count * 160;
+                    int marginX = (availableWidth - totalRichTextBoxWidth) / 2;
+                    foreach (RichTextBox richTextBox in visibleRichTextBoxes)
+                    {
+                        richTextBox.Width = 160;
+                        richTextBox.Location = new Point(marginX, richTextBox.Location.Y);
+                        marginX += 160;
+                    }
+
                 }
                 finally
                 {
