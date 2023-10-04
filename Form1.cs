@@ -323,49 +323,35 @@ namespace AgroCoordenadas
         private void button6_MouseDown(object? sender, EventArgs e)
         {
             button6.MouseDown -= button6_MouseDown;
-            if (form2 == null || form2.IsDisposed)
+            if (string.IsNullOrEmpty(tempFilePath))
             {
-                form2 = new Form2();
-                form2.Show();
+                MessageBox.Show("Selecione um arquivo PDF antes de continuar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                form2.Show(); 
+                if (form2 == null || form2.IsDisposed)
+                {
+                    form2 = new Form2();
+                    form2.Show();
+                }
+                else
+                {
+                    form2.Show();
+                }
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += new DoWorkEventHandler(button6_DoWork);
+                worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(button6_RunWorkerCompleted);
+                worker.RunWorkerAsync();
             }
-            BackgroundWorker worker = new BackgroundWorker();
-
-
-            worker.DoWork += new DoWorkEventHandler(button6_DoWork);
-
-
-            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(button6_RunWorkerCompleted);
-
-          
-            worker.RunWorkerAsync();
-           
         }
 
         private void button6_DoWork(object sender, DoWorkEventArgs e)
         {
-
-
-            if (string.IsNullOrEmpty(tempFilePath))
-            {
-                MessageBox.Show("Selecione um arquivo PDF antes de continuar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-
-            }
-            else
-            {
-
-
                 try
                 {
-
                     bool isSelectablePdf = IsSelectablePdf(tempFilePath);
                     if (isSelectablePdf)
                     {
-
                         List<string> textFromPdfText = PdfText(tempFilePath);
                         List<string> textFromPdfImg = PdfImg(tempFilePath);
                         if (textFromPdfText.Count > textFromPdfImg.Count)
@@ -382,13 +368,10 @@ namespace AgroCoordenadas
                         List<string> textFromPdfImg = PdfImg(tempFilePath);
                         texts = textFromPdfImg;
                     }
-
                     this.Invoke((MethodInvoker)delegate
                     {
                         richTextBox2.Text = string.Join(Environment.NewLine, texts);
                     });
-
-
                     FilteredData filteredData = ApplyFilter(texts);
                     this.Invoke((MethodInvoker)delegate
                     {
@@ -431,20 +414,28 @@ namespace AgroCoordenadas
                         richTextBox.Location = new Point(marginX, richTextBox.Location.Y);
                         marginX += 160;
                     }
-
                     });
-                    
-
-
                 }
-                finally
+            catch (Exception ex)
+            {             
+                if (form2 != null && !form2.IsDisposed)
                 {
-
-                 
-
-                }
+                    form2.Invoke((MethodInvoker)delegate
+                    {
+                        form2.Close();
+                    });
+                }              
+                button6.Invoke((MethodInvoker)delegate
+                {
+                    button6.MouseDown += button6_MouseDown;
+                    button6.Enabled = true;
+                });
+                MessageBox.Show($"Ocorreu um erro", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-
+            finally
+                {
+                }
         }
 
         private void button6_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -459,9 +450,6 @@ namespace AgroCoordenadas
             }
             button6.MouseDown += button6_MouseDown;
             button6.Enabled = true;
-            MessageBox.Show("Filtro finalizado.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-          
-
         }
 
 

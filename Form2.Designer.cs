@@ -55,6 +55,7 @@
             Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Carregando...";
+            TopMost = true;
             ResumeLayout(false);
         }
 
