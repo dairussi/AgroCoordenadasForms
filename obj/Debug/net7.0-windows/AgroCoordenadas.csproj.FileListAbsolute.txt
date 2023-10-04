@@ -92,3 +92,4 @@ C:\Users\DaiaRussi\Documents\AgroCoordenadasForms\obj\Debug\net7.0-windows\refin
 C:\Users\DaiaRussi\Documents\AgroCoordenadasForms\obj\Debug\net7.0-windows\AgroCoordenadas.pdb
 C:\Users\DaiaRussi\Documents\AgroCoordenadasForms\obj\Debug\net7.0-windows\AgroCoordenadas.genruntimeconfig.cache
 C:\Users\DaiaRussi\Documents\AgroCoordenadasForms\obj\Debug\net7.0-windows\ref\AgroCoordenadas.dll
+C:\Users\DaiaRussi\Documents\AgroCoordenadasForms\obj\Debug\net7.0-windows\AgroCoordenadas.Form2.resources

@@ -304,7 +304,7 @@ namespace AgroCoordenadas
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Controls.Add(panel3, 1, 0);
             tableLayoutPanel2.Controls.Add(richTextBox2, 0, 0);
-            tableLayoutPanel2.Location = new Point(15, 85);
+            tableLayoutPanel2.Location = new Point(4, 85);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.Padding = new Padding(8);
             tableLayoutPanel2.RowCount = 1;

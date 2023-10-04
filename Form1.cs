@@ -8,6 +8,7 @@ using AgroCoordenadas.Service;
 using static AgroCoordenadas.Service.FilterService;
 using NPOI.HSSF.UserModel;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace AgroCoordenadas
 {
@@ -21,6 +22,7 @@ namespace AgroCoordenadas
         private string? latResult = null;
         private string? longResult = null;
         FilteredData results = new FilteredData();
+        Form2 form2 = new Form2();
 
 
         public Form1()
@@ -318,24 +320,52 @@ namespace AgroCoordenadas
             }
         }
 
-        //botão chamada dos métodos de extração e filtros 
-        private async void button6_MouseDown(object? sender, EventArgs e)
+        private void button6_MouseDown(object? sender, EventArgs e)
         {
             button6.MouseDown -= button6_MouseDown;
+            if (form2 == null || form2.IsDisposed)
+            {
+                form2 = new Form2();
+                form2.Show();
+            }
+            else
+            {
+                form2.Show(); 
+            }
+            BackgroundWorker worker = new BackgroundWorker();
+
+
+            worker.DoWork += new DoWorkEventHandler(button6_DoWork);
+
+
+            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(button6_RunWorkerCompleted);
+
+          
+            worker.RunWorkerAsync();
+           
+        }
+
+        private void button6_DoWork(object sender, DoWorkEventArgs e)
+        {
+
 
             if (string.IsNullOrEmpty(tempFilePath))
             {
                 MessageBox.Show("Selecione um arquivo PDF antes de continuar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                button6.MouseDown += button6_MouseDown;
+
 
             }
             else
             {
+
+
                 try
                 {
+
                     bool isSelectablePdf = IsSelectablePdf(tempFilePath);
                     if (isSelectablePdf)
                     {
+
                         List<string> textFromPdfText = PdfText(tempFilePath);
                         List<string> textFromPdfImg = PdfImg(tempFilePath);
                         if (textFromPdfText.Count > textFromPdfImg.Count)
@@ -353,11 +383,15 @@ namespace AgroCoordenadas
                         texts = textFromPdfImg;
                     }
 
-                    richTextBox2.Text = string.Join(Environment.NewLine, texts);
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        richTextBox2.Text = string.Join(Environment.NewLine, texts);
+                    });
 
 
                     FilteredData filteredData = ApplyFilter(texts);
-
+                    this.Invoke((MethodInvoker)delegate
+                    {
                     richTextBox4.SelectionAlignment = HorizontalAlignment.Right;
                     richTextBox6.SelectionAlignment = HorizontalAlignment.Right;
                     richTextBox4.Text = eResult = EFilterResult(filteredData);
@@ -376,6 +410,7 @@ namespace AgroCoordenadas
                     bool isPair2Visible = !string.IsNullOrEmpty(richTextBox6.Text) || !string.IsNullOrEmpty(richTextBox7.Text);
                     richTextBox6.Visible = isPair2Visible;
                     richTextBox7.Visible = isPair2Visible;
+
                     int availableWidth = panel3.Width;
                     List<RichTextBox> visibleRichTextBoxes = new List<RichTextBox>();
                     if (isPair1Visible)
@@ -397,14 +432,38 @@ namespace AgroCoordenadas
                         marginX += 160;
                     }
 
+                    });
+                    
+
+
                 }
                 finally
                 {
-                    button6.Enabled = true;
-                    button6.MouseDown += button6_MouseDown;
+
+                 
+
                 }
             }
+
         }
+
+        private void button6_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (form2.InvokeRequired)
+            {
+                form2.Invoke(new MethodInvoker(() => form2.Close()));
+            }
+            else
+            {
+                form2.Close();
+            }
+            button6.MouseDown += button6_MouseDown;
+            button6.Enabled = true;
+            MessageBox.Show("Filtro finalizado.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          
+
+        }
+
 
         //métodos de combinação de resultados para botões de ação
         private string CombineContent()
@@ -545,6 +604,10 @@ namespace AgroCoordenadas
         private void button4_Click(object sender, EventArgs e)
         {
             SaveToExcel();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
