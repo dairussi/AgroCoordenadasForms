@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "985MJJtuY2buwVpmPw/en+V/p3VX5IfqSuj0v4bk4g0MbooJLjCxK8XfzgMFTMDxmG2txQZYPZncPp9L1onZLg==",
+  "dgSpecHash": "uqyB/dsIKPhdzSQ3RVCNTUohhDv+ASmM1GbvVuQ69tTjUDxGRzdA7RsDSrQQOWlwNcaB1QTM7unqHZUpNzsZDw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DaiaRussi\\Documents\\AgroCoordenadasForms\\AgroCoordenadas.csproj",
+  "projectFilePath": "C:\\Users\\DaiaRussi\\Downloads\\AgroCoordenadasForms\\AgroCoordenadas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DaiaRussi\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\DaiaRussi\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
@@ -31,7 +31,10 @@
     "C:\\Users\\DaiaRussi\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
     "C:\\Users\\DaiaRussi\\.nuget\\packages\\system.text.encoding.codepages\\5.0.0\\system.text.encoding.codepages.5.0.0.nupkg.sha512",
     "C:\\Users\\DaiaRussi\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
-    "C:\\Users\\DaiaRussi\\.nuget\\packages\\tesseract\\5.2.0\\tesseract.5.2.0.nupkg.sha512"
+    "C:\\Users\\DaiaRussi\\.nuget\\packages\\tesseract\\5.2.0\\tesseract.5.2.0.nupkg.sha512",
+    "C:\\Users\\DaiaRussi\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.11\\microsoft.netcore.app.runtime.win-x64.7.0.11.nupkg.sha512",
+    "C:\\Users\\DaiaRussi\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.11\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.11.nupkg.sha512",
+    "C:\\Users\\DaiaRussi\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.11\\microsoft.aspnetcore.app.runtime.win-x64.7.0.11.nupkg.sha512"
   ],
   "logs": [
     {

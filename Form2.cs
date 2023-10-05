@@ -16,5 +16,12 @@ namespace AgroCoordenadas
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+            string executablePath = Application.ExecutablePath;
+            System.Diagnostics.Process.Start(executablePath);
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             progressBar1 = new ProgressBar();
+            button1 = new Button();
             SuspendLayout();
             // 
             // progressBar1
@@ -42,12 +43,23 @@
             progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.TabIndex = 0;
             // 
+            // button1
+            // 
+            button1.Location = new Point(320, 111);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 1;
+            button1.Text = "Cancelar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(462, 183);
             ControlBox = false;
+            Controls.Add(button1);
             Controls.Add(progressBar1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -62,6 +74,6 @@
         #endregion
 
         private ProgressBar progressBar1;
-
+        private Button button1;
     }
 }
