@@ -34,8 +34,8 @@ namespace AgroCoordenadas
             openFileDialog1 = new OpenFileDialog();
             richTextBox2 = new RichTextBox();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
             panel1 = new Panel();
+            pictureBox3 = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             richTextBox1 = new RichTextBox();
             button1 = new Button();
@@ -53,8 +53,8 @@ namespace AgroCoordenadas
             tableLayoutPanel2 = new TableLayoutPanel();
             panel4 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -83,27 +83,26 @@ namespace AgroCoordenadas
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Anchor = AnchorStyles.Top;
-            pictureBox2.BackgroundImage = Properties.Resources.banner;
-            pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox2.Location = new Point(503, 16);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(425, 77);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 14;
-            pictureBox2.TabStop = false;
-            // 
             // panel1
             // 
             panel1.AutoSize = true;
-            panel1.Controls.Add(pictureBox2);
+            panel1.Controls.Add(pictureBox3);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1431, 96);
+            panel1.Size = new Size(1431, 134);
             panel1.TabIndex = 15;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.Top;
+            pictureBox3.Image = Properties.Resources.logoagro;
+            pictureBox3.Location = new Point(481, 47);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(468, 84);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 15;
+            pictureBox3.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -123,7 +122,7 @@ namespace AgroCoordenadas
             tableLayoutPanel1.Controls.Add(button5, 5, 0);
             tableLayoutPanel1.Controls.Add(button2, 3, 0);
             tableLayoutPanel1.Controls.Add(button3, 4, 0);
-            tableLayoutPanel1.Location = new Point(381, 17);
+            tableLayoutPanel1.Location = new Point(359, 31);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -290,9 +289,9 @@ namespace AgroCoordenadas
             panel2.AutoSize = true;
             panel2.Controls.Add(tableLayoutPanel1);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 96);
+            panel2.Location = new Point(0, 134);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1431, 67);
+            panel2.Size = new Size(1431, 81);
             panel2.TabIndex = 17;
             // 
             // tableLayoutPanel2
@@ -304,7 +303,7 @@ namespace AgroCoordenadas
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Controls.Add(panel3, 1, 0);
             tableLayoutPanel2.Controls.Add(richTextBox2, 0, 0);
-            tableLayoutPanel2.Location = new Point(4, 85);
+            tableLayoutPanel2.Location = new Point(1, 85);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.Padding = new Padding(8);
             tableLayoutPanel2.RowCount = 1;
@@ -318,7 +317,7 @@ namespace AgroCoordenadas
             panel4.AutoSize = true;
             panel4.Controls.Add(tableLayoutPanel2);
             panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 163);
+            panel4.Location = new Point(0, 215);
             panel4.Name = "panel4";
             panel4.Size = new Size(1431, 810);
             panel4.TabIndex = 19;
@@ -338,8 +337,8 @@ namespace AgroCoordenadas
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AgroCoordenadas";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
@@ -354,7 +353,6 @@ namespace AgroCoordenadas
         private OpenFileDialog openFileDialog1;
         private RichTextBox richTextBox2;
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
         private Panel panel1;
         private TableLayoutPanel tableLayoutPanel1;
         private RichTextBox richTextBox1;
@@ -372,5 +370,6 @@ namespace AgroCoordenadas
         private Panel panel2;
         private TableLayoutPanel tableLayoutPanel2;
         private Panel panel4;
+        private PictureBox pictureBox3;
     }
 }

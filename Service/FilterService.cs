@@ -22,8 +22,8 @@ namespace AgroCoordenadas.Service
         {
             string pattern1 = @"(?<=\s+N\s+|\(\s*N\s*|\s*N=\s*)([\d,.]+)";
             string pattern2 = @"(?<=\s+E\s+|\(\s*E\s*|\s*E=\s*)([\d,.]+)";
-            string pattern3 = @"(?<=\s*Latitude:\s*|\s*Latitude\s*de\s*|\s*Latitude\s*|\s*Lat\s*|\s*Lat:\s*|\(Latitude:\s*|\(Latitude\s*|\(Lat\s*|\(Lat:\s*)([-+°º'”\s\d,.]+)(""|”)";
-            string pattern4 = @"(?<=\s*Longitude:\s*|\s*Longitude\s*de\s*|\s*Longitude\s*|\s*Long\s*|\s*Long:\s*|\(Longitude:\s*|\(Longitude\s*|\(Long\s*|\(Long:\s*)([-+°º'""”\s\d,.]+)(""|”)";
+            string pattern3 = @"(?<=\s*latitude|\s*latitude:|\s*Latitude:\s*|\s*Latitude\s*de\s*|\s*Latitude\s*|\s*Lat\s*|\s*Lat:\s*|\(Latitude:\s*|\(Latitude\s*|\(Lat\s*|\(Lat:\s*)([-+°º'”\s\d,.]+)(""|”)";
+            string pattern4 = @"(?<=\s*longitude|\s*longitude:|\s*Longitude:\s*|\s*Longitude\s*de\s*|\s*Longitude\s*|\s*Long\s*|\s*Long:\s*|\(Longitude:\s*|\(Longitude\s*|\(Long\s*|\(Long:\s*)([-+°º'""”\s\d,.]+)(""|”)";
 
             HashSet<string> seenValues1 = new();
             HashSet<string> seenValues2 = new();

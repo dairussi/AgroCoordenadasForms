@@ -104,6 +104,13 @@ namespace AgroCoordenadas
             }
             catch
             {
+                if (form2 != null && !form2.IsDisposed)
+                {
+                    form2.Invoke((MethodInvoker)delegate
+                    {
+                        form2.Close();
+                    });
+                }
             }
             return texts;
         }
@@ -113,7 +120,8 @@ namespace AgroCoordenadas
         {
             try
             {
-                string outputFolder = "Tempory/";
+                string outputFolder = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Tempory");
+
                 if (Directory.Exists(outputFolder))
                 {
                     Directory.Delete(outputFolder, true);
@@ -157,9 +165,32 @@ namespace AgroCoordenadas
                 }
 
                 //tesseract para extração do texto de imagens
-                Environment.SetEnvironmentVariable("TESSDATA_PREFIX", "./tessdata");
-                using (TesseractEngine engine = new TesseractEngine("./tessdata", "eng", EngineMode.Default))
+
+                //tentativa1 caminho relativo
+                //Environment.SetEnvironmentVariable("TESSDATA_PREFIX", "./tessdata");
+                //using (TesseractEngine engine = new TesseractEngine("./tessdata", "eng", EngineMode.Default))
+                //{
+
+
+                //tentativa2 absoluto modo1
+                //string tessdataDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tessdata");
+
+                //Environment.SetEnvironmentVariable("TESSDATA_PREFIX", tessdataDirectory);
+
+                //using (TesseractEngine engine = new TesseractEngine(tessdataDirectory, "eng", EngineMode.Default))
+
+                //{
+
+
+                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string tessdataDirectory = System.IO.Path.Combine(appDirectory, "tessdata");
+                Environment.SetEnvironmentVariable("TESSDATA_PREFIX", tessdataDirectory);
+                using (TesseractEngine engine = new TesseractEngine(tessdataDirectory, "eng", EngineMode.Default))
+
                 {
+
+
+
                     string[] imageFiles = Directory.GetFiles(outputFolder, "*.png");
                     foreach (var imageFile in imageFiles)
                     {
@@ -181,6 +212,14 @@ namespace AgroCoordenadas
             }
             catch
             {
+                if (form2 != null && !form2.IsDisposed)
+                {
+                    form2.Invoke((MethodInvoker)delegate
+                    {
+                        form2.Close();
+                    });
+                }
+                MessageBox.Show("Erro ao processar imagens com Tesseract: ", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return texts;
         }
@@ -217,6 +256,13 @@ namespace AgroCoordenadas
             }
             catch
             {
+                if (form2 != null && !form2.IsDisposed)
+                {
+                    form2.Invoke((MethodInvoker)delegate
+                    {
+                        form2.Close();
+                    });
+                }
             }
             return results;
         }
@@ -347,34 +393,34 @@ namespace AgroCoordenadas
 
         private void button6_DoWork(object sender, DoWorkEventArgs e)
         {
-                try
+            try
+            {
+                bool isSelectablePdf = IsSelectablePdf(tempFilePath);
+                if (isSelectablePdf)
                 {
-                    bool isSelectablePdf = IsSelectablePdf(tempFilePath);
-                    if (isSelectablePdf)
+                    List<string> textFromPdfText = PdfText(tempFilePath);
+                    List<string> textFromPdfImg = PdfImg(tempFilePath);
+                    if (textFromPdfText.Count > textFromPdfImg.Count)
                     {
-                        List<string> textFromPdfText = PdfText(tempFilePath);
-                        List<string> textFromPdfImg = PdfImg(tempFilePath);
-                        if (textFromPdfText.Count > textFromPdfImg.Count)
-                        {
-                            texts = textFromPdfText;
-                        }
-                        else
-                        {
-                            texts = textFromPdfImg;
-                        }
+                        texts = textFromPdfText;
                     }
                     else
                     {
-                        List<string> textFromPdfImg = PdfImg(tempFilePath);
                         texts = textFromPdfImg;
                     }
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        richTextBox2.Text = string.Join(Environment.NewLine, texts);
-                    });
-                    FilteredData filteredData = ApplyFilter(texts);
-                    this.Invoke((MethodInvoker)delegate
-                    {
+                }
+                else
+                {
+                    List<string> textFromPdfImg = PdfImg(tempFilePath);
+                    texts = textFromPdfImg;
+                }
+                this.Invoke((MethodInvoker)delegate
+                {
+                    richTextBox2.Text = string.Join(Environment.NewLine, texts);
+                });
+                FilteredData filteredData = ApplyFilter(texts);
+                this.Invoke((MethodInvoker)delegate
+                {
                     richTextBox4.SelectionAlignment = HorizontalAlignment.Right;
                     richTextBox6.SelectionAlignment = HorizontalAlignment.Right;
                     richTextBox4.Text = eResult = EFilterResult(filteredData);
@@ -414,17 +460,17 @@ namespace AgroCoordenadas
                         richTextBox.Location = new Point(marginX, richTextBox.Location.Y);
                         marginX += 160;
                     }
-                    });
-                }
+                });
+            }
             catch (Exception ex)
-            {             
+            {
                 if (form2 != null && !form2.IsDisposed)
                 {
                     form2.Invoke((MethodInvoker)delegate
                     {
                         form2.Close();
                     });
-                }              
+                }
                 button6.Invoke((MethodInvoker)delegate
                 {
                     button6.MouseDown += button6_MouseDown;
@@ -434,8 +480,8 @@ namespace AgroCoordenadas
                 return;
             }
             finally
-                {
-                }
+            {
+            }
         }
 
         private void button6_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
