@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Img\logoicon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Img\logoicon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BouncyCastle" Version="1.8.9" />
